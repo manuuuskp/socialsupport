@@ -95,6 +95,8 @@ const PersonalInfo = () => {
           placeholder={t('form.step1.address.placeholder')}
           rows={2}
           control={control}
+          error={!!errors.address}
+          helperText={errors.address ? t(errors.address.message as string) : ''}
         />
 
         <div className="form-grid-3">

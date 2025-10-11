@@ -31,3 +31,16 @@ export type FormData = {
 }
 
 export type StepKey = 'personal' | 'family' | 'situation';
+
+export interface OpenAIRequest {
+  fieldKey: string;
+  contextText: string;
+  tone?: string;
+  length?: string;
+}
+
+export interface OpenAIResponse {
+  data?: string;
+  error?: string;
+  loading: boolean;
+}

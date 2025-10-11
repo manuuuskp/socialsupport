@@ -111,7 +111,33 @@
       }
     },
     "step3": {
-      "title": "Your Situation"
+      "title": "Your Situation",
+      "financialSituation": {
+        "label": "Financial Situation",
+        "placeholder": "Describe your current financial situation...",
+        "helpText": "Please provide details about your financial hardships, debts, or challenges."
+      },
+      "employmentCircumstances": {
+        "label": "Employment Circumstances",
+        "placeholder": "Describe your employment situation...",
+        "helpText": "Include information about job loss, reduced hours, or inability to work."
+      },
+      "reasonForApplying": {
+        "label": "Reason for Applying",
+        "placeholder": "Explain why you need financial assistance...",
+        "helpText": "Describe what specific help you need and how it will benefit you and your family."
+      },
+      "helpButton": "Help Me Write",
+      "aiModal": {
+        "title": "AI Writing Assistant",
+        "description": "Our AI assistant has generated a suggestion based on your information. You can accept it as is, edit it, or discard it.",
+        "accept": "Accept Suggestion",
+        "edit": "Edit Suggestion",
+        "discard": "Discard",
+        "cancel": "Cancel",
+        "generating": "Generating suggestion...",
+        "error": "Failed to generate suggestion. Please try again."
+      }
     },
     "progress": {
       "step": "Step {{current}} of {{total}}"
@@ -121,7 +147,8 @@
     "next": "Next",
     "previous": "Previous",
     "back": "Back",
-    "submit": "Submit"
+    "submit": "Submit",
+    "aiHelper": "AI Helper"
   },
   "validation": {
     "required": "This field is required",

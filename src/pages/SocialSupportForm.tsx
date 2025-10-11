@@ -8,6 +8,7 @@ import { setCurrentStep } from "../store/socialSupportFormSlice";
 import { personalFormSchema } from "../components/socialsupportform/personalInfo/personalFormSchema";
 import FamilyInfo from "../components/socialsupportform/familyInfo/FamilyInfo";
 import { familyFormSchema } from "../components/socialsupportform/familyInfo/familyFormSchema";
+import SituationInfo from "../components/socialsupportform/situationInfo/SituationInfo";
 
 const SocialSupportForm = () => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
@@ -60,6 +61,8 @@ const SocialSupportForm = () => {
                 return <PersonalInfo />
             case 1:
                 return <FamilyInfo />
+            case 2:
+                return <SituationInfo />
             default:
                 return null;
         }

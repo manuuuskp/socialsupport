@@ -3,255 +3,260 @@
 @tailwind utilities;
 
 @layer components {
-  /* Form Input Styles */
-  .input-base {
-    @apply w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 text-base sm:text-sm;
-  }
-  
-  .input-default {
-    @apply input-base border-gray-300 focus:border-blue-500;
-  }
-  
-  .input-error {
-    @apply input-base border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500;
-  }
-  
-  /* Select Field Styles */
-  .select-base {
-    @apply input-base cursor-pointer bg-white;
-  }
-  
-  .select-default {
-    @apply select-base border-gray-300 focus:border-blue-500;
-  }
-  
-  .select-error {
-    @apply select-base border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500;
-  }
-  
-  /* Textarea Styles */
-  .textarea-base {
-    @apply input-base resize-none;
-  }
-  
-  .textarea-default {
-    @apply textarea-base border-gray-300 focus:border-blue-500;
-  }
-  
-  .textarea-error {
-    @apply textarea-base border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500;
-  }
-  
-  /* Form Field Styles */
-  .field-container {
-    @apply flex flex-col;
-  }
-  
-  .field-label {
-    @apply text-base font-medium text-gray-700 mb-2 sm:text-sm;
-  }
-  
-  .field-error {
-    @apply mt-1 text-sm text-red-600 sm:text-xs;
-  }
-  
-  /* Button Styles */
-  .btn-base {
-    @apply px-4 py-3 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-base touch-manipulation sm:py-2 sm:text-sm;
-  }
-  
-  .btn-primary {
-    @apply btn-base bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
-  }
-  
-  .btn-secondary {
-    @apply btn-base bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
-  }
-  
-  .btn-outline {
-    @apply btn-base bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-blue-500;
-  }
-  
-  /* Card Styles */
-  .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6;
-  }
-  
-  /* Page Containers */
-  .page-container {
-    @apply max-w-2xl mx-auto px-4 sm:px-6 lg:px-0;
-  }
-  
-  /* Page Titles */
-  .page-title {
-    @apply text-xl font-bold text-center text-gray-900 mb-6 sm:text-2xl lg:text-3xl sm:mb-8;
-  }
-  
-  /* Form Grid Styles */
-  .form-grid-1 {
-    @apply grid grid-cols-1 gap-6 lg:gap-8;
-  }
-  
-  .form-grid-2 {
-    @apply grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8;
-  }
-  
-  .form-grid-3 {
-    @apply grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8;
-  }
-  
-  /* Form Spacing Styles */
-  .form-section {
-    @apply space-y-6 sm:space-y-8;
-  }
-  
-  /* Progress Bar Styles */
-  .progress-step {
-    @apply flex items-center justify-center w-8 h-8 text-sm font-bold rounded-full border-2 transition-all duration-300 touch-manipulation sm:w-10 sm:h-10 sm:text-xs;
-  }
-  
-  .progress-step-active {
-    @apply progress-step bg-blue-600 text-white border-blue-600;
-  }
-  
-  .progress-step-completed {
-    @apply progress-step bg-green-600 text-white border-green-600;
-  }
-  
-  .progress-step-pending {
-    @apply progress-step bg-gray-100 text-gray-500 border-gray-300;
-  }
-  
-  
-  /* Loading Spinner */
-  .spinner {
-    @apply animate-spin rounded-full border-2 border-gray-300 border-t-blue-600 w-6 h-6 sm:w-5 sm:h-5;
-  }
-  
-  /* Notification Styles */
-  .notification-success {
-    @apply bg-green-50 border border-green-200 text-green-800 px-4 py-4 rounded-md text-sm sm:py-3 sm:text-xs;
-  }
-  
-  .notification-error {
-    @apply bg-red-50 border border-red-200 text-red-800 px-4 py-4 rounded-md text-sm sm:py-3 sm:text-xs;
-  }
-  
-  .notification-info {
-    @apply bg-blue-50 border border-blue-200 text-blue-800 px-4 py-4 rounded-md text-sm sm:py-3 sm:text-xs;
-  }
+
+    /* Form Input Styles */
+    .input-base {
+        @apply w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 text-base sm:text-sm;
+    }
+
+    .input-default {
+        @apply input-base border-gray-300 focus:border-blue-500;
+    }
+
+    .input-error {
+        @apply input-base border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500;
+    }
+
+    /* Select Field Styles */
+    .select-base {
+        @apply input-base cursor-pointer bg-white;
+    }
+
+    .select-default {
+        @apply select-base border-gray-300 focus:border-blue-500;
+    }
+
+    .select-error {
+        @apply select-base border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500;
+    }
+
+    /* Textarea Styles */
+    .textarea-base {
+        @apply input-base resize-none;
+    }
+
+    .textarea-default {
+        @apply textarea-base border-gray-300 focus:border-blue-500;
+    }
+
+    .textarea-error {
+        @apply textarea-base border-red-500 bg-red-50 focus:border-red-500 focus:ring-red-500;
+    }
+
+    /* Form Field Styles */
+    .field-container {
+        @apply flex flex-col;
+    }
+
+    .field-label {
+        @apply text-base font-medium text-gray-700 mb-2 sm:text-sm;
+    }
+
+    .field-error {
+        @apply mt-1 text-sm text-red-600 sm:text-xs;
+    }
+
+    /* Button Styles */
+    .btn-base {
+        @apply px-4 py-3 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-base touch-manipulation sm:py-2 sm:text-sm;
+    }
+
+    .btn-primary {
+        @apply btn-base bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+    }
+
+    .btn-secondary {
+        @apply btn-base bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
+    }
+
+    .btn-outline {
+        @apply btn-base bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 focus:ring-blue-500;
+    }
+
+    /* Card Styles */
+    .card {
+        @apply bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6;
+    }
+
+    /* Page Containers */
+    .page-container {
+        @apply max-w-2xl mx-auto px-4 sm:px-6 lg:px-0;
+    }
+
+    /* Page Titles */
+    .page-title {
+        @apply text-xl font-bold text-center text-gray-900 mb-6 sm:text-2xl lg:text-3xl sm:mb-8;
+    }
+
+    /* Form Grid Styles */
+    .form-grid-1 {
+        @apply grid grid-cols-1 gap-6 lg:gap-8;
+    }
+
+    .form-grid-2 {
+        @apply grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8;
+    }
+
+    .form-grid-3 {
+        @apply grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8;
+    }
+
+    /* Form Spacing Styles */
+    .form-section {
+        @apply space-y-6 sm:space-y-8;
+    }
+
+    /* Progress Bar Styles */
+    .progress-step {
+        @apply flex items-center justify-center w-8 h-8 text-sm font-bold rounded-full border-2 transition-all duration-300 touch-manipulation sm:w-10 sm:h-10 sm:text-xs;
+    }
+
+    .progress-step-active {
+        @apply progress-step bg-blue-600 text-white border-blue-600;
+    }
+
+    .progress-step-completed {
+        @apply progress-step bg-green-600 text-white border-green-600;
+    }
+
+    .progress-step-pending {
+        @apply progress-step bg-gray-100 text-gray-500 border-gray-300;
+    }
+
+    .ai-button {
+        @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors duration-200 touch-manipulation sm:py-1 sm:text-xs;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+        @apply animate-spin rounded-full border-2 border-gray-300 border-t-blue-600 w-6 h-6 sm:w-5 sm:h-5;
+    }
+
+    /* Notification Styles */
+    .notification-success {
+        @apply bg-green-50 border border-green-200 text-green-800 px-4 py-4 rounded-md text-sm sm:py-3 sm:text-xs;
+    }
+
+    .notification-error {
+        @apply bg-red-50 border border-red-200 text-red-800 px-4 py-4 rounded-md text-sm sm:py-3 sm:text-xs;
+    }
+
+    .notification-info {
+        @apply bg-blue-50 border border-blue-200 text-blue-800 px-4 py-4 rounded-md text-sm sm:py-3 sm:text-xs;
+    }
 }
 
 @layer utilities {
-  .rtl-text {
-    text-align: right;
-  }
-  
-  .ltr-text {
-    text-align: left;
-  }
-  
-  /* Focus Styles */
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-  }
-  
-  /* Responsive Text */
-  .text-responsive-sm {
-    @apply text-sm sm:text-xs;
-  }
-  
-  .text-responsive-base {
-    @apply text-base sm:text-sm;
-  }
-  
-  .text-responsive-lg {
-    @apply text-xl sm:text-lg lg:text-xl;
-  }
-  
-  /* Responsive Spacing */
-  .spacing-responsive {
-    @apply px-4 sm:px-6 lg:px-0;
-  }
-  
-  .gap-responsive {
-    @apply gap-6 lg:gap-8;
-  }
-  
-  /* Shadow Utilities */
-  .shadow-card {
-    @apply shadow-sm hover:shadow-md transition-shadow duration-200;
-  }
-  
-  /* Touch Utilities */
-  .touch-target {
-    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
-  }
-  
-  .mobile-padding {
-    @apply p-4 sm:p-6 lg:p-8;
-  }
-  
-  .mobile-margin {
-    @apply m-4 sm:m-6 lg:m-8;
-  }
-  
-  .mobile-text {
-    @apply text-base leading-relaxed sm:text-sm sm:leading-normal;
-  }
-  
-  /* Animation Classes */
-  .mobile-transition {
-    @apply transition-all duration-300 ease-in-out;
-  }
-  
-  .mobile-hover {
-    @apply hover:scale-105 active:scale-95 transition-transform duration-200;
-  }
+    .rtl-text {
+        text-align: right;
+    }
+
+    .ltr-text {
+        text-align: left;
+    }
+
+    /* Focus Styles */
+    .focus-ring {
+        @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    }
+
+    /* Responsive Text */
+    .text-responsive-sm {
+        @apply text-sm sm:text-xs;
+    }
+
+    .text-responsive-base {
+        @apply text-base sm:text-sm;
+    }
+
+    .text-responsive-lg {
+        @apply text-xl sm:text-lg lg:text-xl;
+    }
+
+    /* Responsive Spacing */
+    .spacing-responsive {
+        @apply px-4 sm:px-6 lg:px-0;
+    }
+
+    .gap-responsive {
+        @apply gap-6 lg:gap-8;
+    }
+
+    /* Shadow Utilities */
+    .shadow-card {
+        @apply shadow-sm hover:shadow-md transition-shadow duration-200;
+    }
+
+    /* Touch Utilities */
+    .touch-target {
+        @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+    }
+
+    .mobile-padding {
+        @apply p-4 sm:p-6 lg:p-8;
+    }
+
+    .mobile-margin {
+        @apply m-4 sm:m-6 lg:m-8;
+    }
+
+    .mobile-text {
+        @apply text-base leading-relaxed sm:text-sm sm:leading-normal;
+    }
+
+    /* Animation Classes */
+    .mobile-transition {
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    .mobile-hover {
+        @apply hover:scale-105 active:scale-95 transition-transform duration-200;
+    }
 }
 
 @layer base {
-  [dir="rtl"] {
-    text-align: right;
-  }
+    [dir="rtl"] {
+        text-align: right;
+    }
 
-  [dir="rtl"] .stepper-rtl {
-    direction: rtl;
-  }
+    [dir="rtl"] .stepper-rtl {
+        direction: rtl;
+    }
 
-  [lang="ar"], [lang="ar"] * {
-    font-family: 'Noto Sans Arabic', sans-serif;
-  }
+    [lang="ar"],
+    [lang="ar"] * {
+        font-family: 'Noto Sans Arabic', sans-serif;
+    }
 
-  /* Focus styles for accessibility */
-  .focus-visible:focus {
-    outline: 2px solid #2563eb;
-    outline-offset: 2px;
-  }
-  
-  /* Default focus styles for better accessibility */
-  input:focus,
-  select:focus,
-  textarea:focus,
-  button:focus {
-    @apply focus-ring;
-  }
-  
-  /* body defaults */
-  body {
-    @apply text-base leading-relaxed sm:text-sm sm:leading-normal;
-  }
-  
-  /* interactive elements */
-  button,
-  [role="button"],
-  input[type="submit"],
-  input[type="button"] {
-    @apply touch-manipulation min-h-[44px];
-  }
-  
-  /* container defaults */
-  .container {
-    @apply px-4 sm:px-6 lg:px-8;
-  }
+    /* Focus styles for accessibility */
+    .focus-visible:focus {
+        outline: 2px solid #2563eb;
+        outline-offset: 2px;
+    }
+
+    /* Default focus styles for better accessibility */
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        @apply focus-ring;
+    }
+
+    /* body defaults */
+    body {
+        @apply text-base leading-relaxed sm:text-sm sm:leading-normal;
+    }
+
+    /* interactive elements */
+    button,
+    [role="button"],
+    input[type="submit"],
+    input[type="button"] {
+        @apply touch-manipulation min-h-[44px];
+    }
+
+    /* container defaults */
+    .container {
+        @apply px-4 sm:px-6 lg:px-8;
+    }
 }
