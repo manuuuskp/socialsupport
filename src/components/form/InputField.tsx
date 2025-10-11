@@ -1,0 +1,53 @@
+import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
+
+interface InputFieldProps<T extends FieldValues> {
+  name: Path<T>;
+  type?: string;
+  placeholder: string;
+  label: string;
+  error?: boolean;
+  helperText?: string;
+  control: Control<T>;
+}
+
+const InputField = <T extends FieldValues>({
+  name,
+  type = 'text',
+  placeholder,
+  label,
+  error,
+  helperText,
+  control,
+}: InputFieldProps<T>) => {
+  return (
+    <div className="field-container">
+      <label htmlFor={name} className="field-label">
+        {label}
+      </label>
+
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <input
+            {...field}
+            id={name}
+            type={type}
+            value={field.value || ''}
+            placeholder={placeholder}
+            className={error ? 'input-error' : 'input-default'}
+            aria-describedby={error ? `${name}-error` : undefined}
+          />
+        )}
+      />
+
+      {error && helperText && (
+        <p id={`${name}-error`} className="field-error">
+          {helperText}
+        </p>
+      )}
+    </div>
+  );
+}
+
+export default InputField;

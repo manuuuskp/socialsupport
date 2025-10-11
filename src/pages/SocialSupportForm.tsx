@@ -1,7 +1,7 @@
 import ApplicationForm from "../components/ApplicationForm";
 import FormButtonContainer from "../components/FormButtonContainer";
 import ProgressBar from "../components/ProgressBar";
-import PersonalInfo from "../components/socialsupportform/PersonalInfo";
+import PersonalInfo from "../components/socialsupportform/personalInfo/PersonalInfo";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setCurrentStep } from "../store/socialSupportFormSlice";
 
@@ -26,7 +26,7 @@ const SocialSupportForm = () => {
     const isValidStep = (step: number): boolean => {
         switch (step) {
             case 0:
-                return !!(formData.personal?.name && formData.personal?.nationalId && formData.personal?.phone);
+                return true;
             default:
                 return false;
         }
