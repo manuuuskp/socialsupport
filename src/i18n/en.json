@@ -41,8 +41,8 @@
         "placeholder": "Enter your city"
       },
       "state": {
-        "label": "State/Province",
-        "placeholder": "Enter your state or province"
+        "label": "State",
+        "placeholder": "Enter your state"
       },
       "country": {
         "label": "Country",
@@ -73,5 +73,11 @@
     "progress": {
       "step": "Step {{current}} of {{total}}"
     }
+  },
+   "buttons": {
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "submit": "Submit"
   }
 }

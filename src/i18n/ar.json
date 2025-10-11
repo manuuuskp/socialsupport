@@ -41,8 +41,8 @@
         "placeholder": "أدخل مدينتك"
       },
       "state": {
-        "label": "الولاية/المقاطعة",
-        "placeholder": "أدخل ولايتك أو مقاطعتك"
+        "label": "ولاية",
+        "placeholder": "أدخل ولايتك"
       },
       "country": {
         "label": "البلد",
@@ -73,5 +73,11 @@
     "progress": {
       "step": "الخطوة {{current}} من {{total}}"
     }
+  },
+    "buttons": {
+    "next": "التالي",
+    "previous": "السابق",
+    "back": "خلف",
+    "submit": "تقديم"
   }
 }
