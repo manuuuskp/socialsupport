@@ -8,7 +8,61 @@
   },
   "form": {
     "step1": {
-      "title": "Personal Information"
+      "title": "Personal Information",
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name",
+        "error": "Full name is required"
+      },
+      "nationalId": {
+        "label": "National ID",
+        "placeholder": "Enter your national ID",
+        "error": "Valid national ID is required"
+      },
+      "dob": {
+        "label": "Date of Birth",
+        "error": "Date of birth is required"
+      },
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Select your gender",
+        "options": {
+          "male": "Male",
+          "female": "Female",
+          "other": "Other"
+        }
+      },
+      "address": {
+        "label": "Address",
+        "placeholder": "Enter your address"
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "Enter your city"
+      },
+      "state": {
+        "label": "State/Province",
+        "placeholder": "Enter your state or province"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Select your country"
+      },
+      "phoneCountryCode": {
+        "label": "Country Code",
+        "placeholder": "Select country code",
+        "error": "Country code is required"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "error": "Valid phone number is required"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address",
+        "error": "Valid email address is required"
+      }
     },
      "step2": {
       "title": "Family Information"
