@@ -1,7 +1,9 @@
-import Layout from './pages/Layout'
-import './i18n';
-import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Provider } from 'react-redux';
+import './i18n';
+import { store } from './store';
+import Layout from './pages/Layout'
 
 function App() {
 
@@ -13,9 +15,9 @@ function App() {
   }, [i18n.language])
 
   return (
-    <>
+    <Provider store={store}>
       <Layout />
-    </>
+    </Provider>
   )
 }
 

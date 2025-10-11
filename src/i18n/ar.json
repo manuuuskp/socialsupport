@@ -5,5 +5,19 @@
   "language": {
     "switch": "English",
     "current": "العربية"
+  },
+  "form": {
+    "step1": {
+      "title": "المعلومات الشخصية"
+    },
+     "step2": {
+      "title": "معلومات الأسرة"
+    },
+    "step3": {
+      "title": "وضعك الحالي"
+    },
+    "progress": {
+      "step": "الخطوة {{current}} من {{total}}"
+    }
   }
 }

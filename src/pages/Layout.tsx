@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import SocialSupportForm from "./SocialSupportForm";
 
 const Layout = () => {
     return (
@@ -7,7 +8,7 @@ const Layout = () => {
                 <Header />
             </header>
             <main>
-                <h1 className="text-red-500">Layout Component</h1>
+                <SocialSupportForm />
             </main>
         </>
     )
