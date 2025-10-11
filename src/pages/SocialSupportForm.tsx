@@ -1,9 +1,13 @@
+import * as yup from "yup";
 import ApplicationForm from "../components/ApplicationForm";
 import FormButtonContainer from "../components/FormButtonContainer";
 import ProgressBar from "../components/ProgressBar";
 import PersonalInfo from "../components/socialsupportform/personalInfo/PersonalInfo";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setCurrentStep } from "../store/socialSupportFormSlice";
+import { personalFormSchema } from "../components/socialsupportform/personalInfo/personalFormSchema";
+import FamilyInfo from "../components/socialsupportform/familyInfo/FamilyInfo";
+import { familyFormSchema } from "../components/socialsupportform/familyInfo/familyFormSchema";
 
 const SocialSupportForm = () => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
@@ -26,7 +30,25 @@ const SocialSupportForm = () => {
     const isValidStep = (step: number): boolean => {
         switch (step) {
             case 0:
-                return true;
+                try {
+                    personalFormSchema.validateSync(formData.personal, { abortEarly: false });
+                    return true;
+                } catch (error) {
+                    if (error instanceof yup.ValidationError) {
+                        console.log("Validation errors:", error.inner);
+                    }
+                    return false;
+                }
+            case 1:
+                try {
+                    familyFormSchema.validateSync(formData.family, { abortEarly: false });
+                    return true;
+                } catch (error) {
+                    if (error instanceof yup.ValidationError) {
+                        console.log("Validation errors:", error.inner);
+                    }
+                    return false;
+                }
             default:
                 return false;
         }
@@ -36,6 +58,8 @@ const SocialSupportForm = () => {
         switch (currentStep) {
             case 0:
                 return <PersonalInfo />
+            case 1:
+                return <FamilyInfo />
             default:
                 return null;
         }
@@ -51,7 +75,7 @@ const SocialSupportForm = () => {
             <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 md:p-8 mb-8">
                 <div className="min-h-[300px] sm:min-h-[400px]">
                     {renderCurrentStep()}
-                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={false} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={() => {}} />
+                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={false} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={() => { }} />
                 </div>
             </div>
         </ApplicationForm>

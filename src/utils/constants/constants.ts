@@ -23,3 +23,16 @@ export const COUNTRY_CODES = [
   { value: '+65', label: '+65 (SG)', country: 'SG' },
   { value: '+86', label: '+86 (CN)', country: 'CN' },
 ];
+
+export const CURRENCIES = [
+  { value: 'AED', label: 'AED (UAE Dirham)', symbol: 'AED' },
+  { value: 'USD', label: 'USD (US Dollar)', symbol: 'USD' },
+  { value: 'EUR', label: 'EUR (Euro)', symbol: 'EUR' },
+  { value: 'GBP', label: 'GBP (British Pound)', symbol: 'GBP' },
+  { value: 'SAR', label: 'SAR (Saudi Riyal)', symbol: 'SAR' },
+  { value: 'INR', label: 'INR (Indian Rupee)', symbol: 'INR' },
+  { value: 'CAD', label: 'CAD (Canadian Dollar)', symbol: 'CAD' },
+  { value: 'AUD', label: 'AUD (Australian Dollar)', symbol: 'AUD' },
+  { value: 'SGD', label: 'SGD (Singapore Dollar)', symbol: 'SGD' },
+  { value: 'JPY', label: 'JPY (Japanese Yen)', symbol: 'JPY' },
+];

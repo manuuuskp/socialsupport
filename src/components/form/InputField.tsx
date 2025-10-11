@@ -7,6 +7,8 @@ interface InputFieldProps<T extends FieldValues> {
   label: string;
   error?: boolean;
   helperText?: string;
+  min?: number;
+  step?: number;
   control: Control<T>;
 }
 
@@ -17,6 +19,8 @@ const InputField = <T extends FieldValues>({
   label,
   error,
   helperText,
+  min = 0,
+  step = 1,
   control,
 }: InputFieldProps<T>) => {
   return (
@@ -37,6 +41,8 @@ const InputField = <T extends FieldValues>({
             placeholder={placeholder}
             className={error ? 'input-error' : 'input-default'}
             aria-describedby={error ? `${name}-error` : undefined}
+            min={type === 'number' ? min : undefined}
+            step={type === 'number' ? step : undefined}
           />
         )}
       />

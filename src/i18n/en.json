@@ -64,8 +64,51 @@
         "error": "Valid email address is required"
       }
     },
-     "step2": {
-      "title": "Family Information"
+    "step2": {
+      "title": "Family Information",
+      "maritalStatus": {
+        "label": "Marital Status",
+        "placeholder": "Select your marital status",
+        "options": {
+          "single": "Single",
+          "married": "Married",
+          "widowed": "Widowed",
+          "divorced": "Divorced"
+        }
+      },
+      "dependents": {
+        "label": "Number of Dependents",
+        "placeholder": "Enter number of dependents"
+      },
+      "employmentStatus": {
+        "label": "Employment Status",
+        "placeholder": "Select your employment status",
+        "options": {
+          "employed": "Employed",
+          "unemployed": "Unemployed",
+          "self-employed": "Self-Employed",
+          "student": "Student"
+        }
+      },
+      "incomeCurrency": {
+        "label": "Income Currency",
+        "placeholder": "Select currency",
+        "error": "Currency is required"
+      },
+      "monthlyIncome": {
+        "label": "Monthly Income",
+        "placeholder": "Enter your monthly income"
+      },
+      "housingStatus": {
+        "label": "Housing Status",
+        "placeholder": "Select your housing status",
+        "options": {
+          "owned": "Owned",
+          "rented": "Rented",
+          "shelter": "Shelter",
+          "homeless": "Homeless"
+        }
+      }
     },
     "step3": {
       "title": "Your Situation"
@@ -95,6 +138,13 @@
     "addressLength": "Address must be at least 5 characters long",
     "cityCharacters": "City must contain only letters and spaces",
     "stateCharacters": "State must contain only letters and spaces",
-    "phoneDigits": "Phone number must be between 7 and 12 digits"
+    "phoneDigits": "Phone number must be between 7 and 12 digits",
+    "dependentsNumber": "Dependents must be a number between 0 and 20",
+    "incomePositive": "Monthly income must be a positive number",
+    "incomeMax": "Please enter a valid income",
+    "currencyFormat": "Invalid currency code",
+    "maritalStatusInvalid": "Invalid marital status selection",
+    "employmentStatusInvalid": "Invalid employment status selection",
+    "housingStatusInvalid": "Invalid housing status selection"
   }
 }

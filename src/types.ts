@@ -8,6 +8,7 @@ export type FormData = {
     city?: string;
     state?: string;
     country?: string;
+    phoneCountryCode?: string;
     phone?: string;
     email?: string;
   };

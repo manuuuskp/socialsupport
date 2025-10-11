@@ -64,8 +64,51 @@
         "error": "عنوان بريد إلكتروني صحيح مطلوب"
       }
     },
-     "step2": {
-      "title": "معلومات الأسرة"
+    "step2": {
+      "title": "معلومات الأسرة",
+      "maritalStatus": {
+        "label": "الحالة الاجتماعية",
+        "placeholder": "اختر حالتك الاجتماعية",
+        "options": {
+          "single": "أعزب",
+          "married": "متزوج",
+          "widowed": "أرمل",
+          "divorced": "مطلق"
+        }
+      },
+      "dependents": {
+        "label": "عدد المُعالين",
+        "placeholder": "أدخل عدد المُعالين"
+      },
+      "employmentStatus": {
+        "label": "حالة التوظيف",
+        "placeholder": "اختر حالة توظيفك",
+        "options": {
+          "employed": "موظف",
+          "unemployed": "عاطل عن العمل",
+          "self-employed": "يعمل لحسابه الخاص",
+          "student": "طالب"
+        }
+      },
+      "incomeCurrency": {
+        "label": "عملة الدخل",
+        "placeholder": "اختر العملة",
+        "error": "العملة مطلوبة"
+      },
+      "monthlyIncome": {
+        "label": "الدخل الشهري",
+        "placeholder": "أدخل دخلك الشهري"
+      },
+      "housingStatus": {
+        "label": "حالة السكن",
+        "placeholder": "اختر حالة سكنك",
+        "options": {
+          "owned": "مملوك",
+          "rented": "مستأجر",
+          "shelter": "مأوى",
+          "homeless": "بلا مأوى"
+        }
+      }
     },
     "step3": {
       "title": "وضعك الحالي"
@@ -95,6 +138,13 @@
     "addressLength": "يجب أن يكون العنوان بطول 5 أحرف على الأقل",
     "cityCharacters": "يجب أن تحتوي المدينة على أحرف ومسافات فقط",
     "stateCharacters": "يجب أن تحتوي الحالة على أحرف ومسافات فقط",
-    "phoneDigits": "يجب أن يكون رقم الهاتف بين 7 و 12 رقمًا"
+    "phoneDigits": "يجب أن يكون رقم الهاتف بين 7 و 12 رقمًا",
+    "dependentsNumber": "يجب أن يكون عدد المعالين بين 0 و 20",
+    "incomePositive": "يجب أن يكون الدخل الشهري رقمًا موجبًا",
+    "incomeMax": "الرجاء إدخال دخل صالح",
+    "currencyFormat": "رمز العملة غير صالح",
+    "maritalStatusInvalid": "اختيار الحالة الاجتماعية غير صالح",
+    "employmentStatusInvalid": "اختيار حالة التوظيف غير صالح",
+    "housingStatusInvalid": "اختيار حالة السكن غير صالح"
   }
 }
