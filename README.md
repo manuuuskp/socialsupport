@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+# Social Support Form Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A multi-step form application built with **React**, **TypeScript**, and **Vite**.  
+It integrates **OpenAI API** to help users generate text responses for financial assistance applications.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- Multi-step form (Personal, Family, Situation)
+- AI-assisted text generation using OpenAI
+- Internationalization support (English & Arabic)
+- Form validation with **Yup** and **React Hook Form**
+- Persistent state with **Redux Toolkit** and localStorage
+- Mobile-first responsive design
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Requirements
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js >= 18
+- npm or yarn
+- OpenAI API Key
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the repository
+
+``` bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+
+```
+### 2. Install dependencies
+
+```bash
+npm install
+or
+yarn install
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Set up environment variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a .env file in the root folder:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+VITE_OPENAI_KEY=your_openai_api_key_here
+VITE_API_BASE_URL=your_backend_base_url
+VITE_OPENAPI_URL=your_openapi_url
+
+### 4. Run the development server
+
+```bash
+npm run dev 
+or 
+yarn dev
+
 ```
+
+### 5. Build for production
+
+```bash
+npm run build
+or
+yarn build
+
+```
+
+### 6. Preview production build
+
+```bash
+npm run preview
+or
+yarn preview
+
+```
+
+
+### OpenAI API Integration
+
+The application uses OpenAI GPT-3.5-Turbo for generating text responses.
+
+How it works:
+
+User opens the AI Helper modal for a field (Financial Situation, Employment Circumstances, Reason for Applying).
+
+The app sends the applicant’s context to OpenAI using your API key.
+
+OpenAI returns a professionally generated text.
+
+User can edit, accept, or regenerate the text.
+
+
+### Project Structure
+
+src/
+├─ components/          # React components for forms and AI helper
+├─ store/               # Redux slices and store setup
+├─ hooks/               # Custom React hooks
+├─ services/            # API calls (OpenAI integration)
+├─ types/               # TypeScript types
+├─ i18n/                # Internationalization setup
+├─ utils                # contants, storage and middlewares
+└─ App.tsx              # Main App component
