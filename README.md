@@ -92,6 +92,14 @@ OpenAI returns a professionally generated text.
 
 User can edit, accept, or regenerate the text.
 
+# Important Notes:
+
+Never expose your API key in frontend code or public repos.
+
+The API key is stored in the .env file and accessed via Vite’s environment variables.
+
+Requests to OpenAI are proxied from the frontend via axios.
+
 
 ### Project Structure
 
