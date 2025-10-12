@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { type OpenAIRequest } from '../types';
+import { fieldPrompts } from '../utils/constants/prompts';
 
-const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+const OPENAI_API_URL = import.meta.env.VITE_OPENAPI_URL;
 const API_KEY = import.meta.env.VITE_OPENAI_KEY;
 
 interface ChatMessage {
-  role: 'system' | 'user' | 'assistant';
+  role: 'system' | 'user';
   content: string;
 }
 
@@ -49,7 +50,7 @@ export async function generateText({
   length = 'medium'
 }: OpenAIRequest): Promise<string> {
   if (!API_KEY) {
-    throw new Error('OpenAI API key is not configured. Please add VITE_OPENAI_KEY to your .env file.');
+    throw new Error('OpenAI API key is not configured. Please add OPENAI_KEY.');
   }
 
   const systemMessage = `
@@ -64,18 +65,26 @@ Instructions:
 - Length: 
   - short → 50-100 words
   - medium → 100-200 words
-  - long → 200300 words
+  - long → 200-300 words
 - Focus on genuine need, family context, and financial hardship.
 
 Generate a ${tone} and ${length} application response for the field "${fieldKey}".
 `;
 
-  const userMessage = `Please generate a financial situation statement based on the following details:
-  ${contextText}
+  const fieldContext = fieldPrompts[fieldKey as keyof typeof fieldPrompts];
+
+  const userMessage = `
+Please generate a statement for the "${fieldKey}" section.
+
+${fieldContext}
+
+User-provided details:
+${contextText}
+
 Tone: respectful
 Length: medium
 Field: ${fieldKey}
-`
+`;
 
   const messages: ChatMessage[] = [
     { role: 'system', content: systemMessage },

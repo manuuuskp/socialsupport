@@ -1,5 +1,7 @@
 import * as yup from "yup";
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import i18n from "../i18n";
 import ApplicationForm from "../components/ApplicationForm";
 import FormButtonContainer from "../components/FormButtonContainer";
 import ProgressBar from "../components/ProgressBar";
@@ -12,7 +14,6 @@ import { familyFormSchema } from "../components/socialsupportform/familyInfo/fam
 import SituationInfo from "../components/socialsupportform/situationInfo/SituationInfo";
 import { situtationFormSchema } from "../components/socialsupportform/situationInfo/situationFormSchema";
 import { useSubmitSocialSupportForm } from "../hooks/useSubmitSocialSupportForm";
-import 'react-toastify/dist/ReactToastify.css';
 
 const SocialSupportForm = () => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
@@ -81,7 +82,7 @@ const SocialSupportForm = () => {
                     <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={false} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={submitForm} />
                 </div>
             </div>
-            <ToastContainer position="bottom-left" autoClose={5000} />
+            <ToastContainer rtl={i18n.dir(i18n.language) === 'rtl'} position="bottom-left" autoClose={1500} />
         </ApplicationForm>
     )
 }

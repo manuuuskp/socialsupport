@@ -144,6 +144,10 @@
     },
     "progress": {
       "step": "Step {{current}} of {{total}}"
+    },
+    "submission": {
+      "success": "Form submitted successfully!",
+      "failure": "Failed to submit form. Please try again."
     }
   },
   "buttons": {
