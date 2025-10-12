@@ -19,7 +19,7 @@ const ProgressBar = ({ currentStep, totalSteps, steps, onStepClick }: ProgressBa
   return (
     <div className="w-full mb-4 px-2 sm:mb-8 sm:px-0" role="navigation" aria-label="Progress">
       <div className="mb-2 flex justify-center sm:mb-4">
-        <div className="w-full max-w-2xl mt-4">
+        <div className="w-full max-w-2xl">
           <ol className="flex items-center justify-center text-xs font-medium text-center text-gray-500 sm:text-sm sm:text-base">
           {steps.map((stepKey, index) => {
             const isActive = index === currentStep;

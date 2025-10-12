@@ -42,6 +42,8 @@ export interface OpenAIRequest {
   contextText: string;
   tone?: string;
   length?: string;
+  userPrompt?: string;
+  language?: string;
 }
 
 export interface OpenAIResponse {

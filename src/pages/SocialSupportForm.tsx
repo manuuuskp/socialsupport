@@ -30,39 +30,24 @@ const SocialSupportForm = () => {
     };
 
     const isValidStep = (step: number): boolean => {
-        switch (step) {
-            case 0:
-                try {
+        try {
+            switch (step) {
+                case 0:
                     personalFormSchema.validateSync(formData.personal, { abortEarly: false });
-                    return true;
-                } catch (error) {
-                    if (error instanceof yup.ValidationError) {
-                        console.log("Validation errors:", error.inner);
-                    }
-                    return false;
-                }
-            case 1:
-                try {
+                    break;
+                case 1:
                     familyFormSchema.validateSync(formData.family, { abortEarly: false });
-                    return true;
-                } catch (error) {
-                    if (error instanceof yup.ValidationError) {
-                        console.log("Validation errors:", error.inner);
-                    }
-                    return false;
-                }
-            case 2:
-                try {
+                    break;
+                case 2:
                     situtationFormSchema.validateSync(formData.situation, { abortEarly: false });
-                    return true;
-                } catch (error) {
-                    if (error instanceof yup.ValidationError) {
-                        console.log("Validation errors:", error.inner);
-                    }
+                    break;
+                default:
                     return false;
-                }
-            default:
-                return false;
+            }
+            return true;
+        } catch (error) {
+            if (error instanceof yup.ValidationError) console.log("Validation errors:", error.inner);
+            return false;
         }
     };
 
