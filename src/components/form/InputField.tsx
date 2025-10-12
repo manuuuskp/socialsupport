@@ -38,6 +38,14 @@ const InputField = <T extends FieldValues>({
             id={name}
             type={type}
             value={field.value || ''}
+            onChange={(e) => {
+              const value = e.target.value;
+              if(type === 'number') {
+                field.onChange(value === '' ? null : Number(value));
+              } else {
+                field.onChange(value);
+              }
+            }}
             placeholder={placeholder}
             className={`${error ? 'input-error' : 'input-default'} ${type === 'number' ? 'no-spinner' : ''}`}
             aria-describedby={error ? `${name}-error` : undefined}
