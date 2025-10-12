@@ -23,15 +23,22 @@ const AIHelper = ({
   length = 'medium',
 }: AIHelperProps) => {
   const { t } = useTranslation();
-  const { data, error, loading, request } = useOpenAI();
+  const { data, error, loading, request, reset } = useOpenAI();
   const [editedText, setEditedText] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (open && !data && !loading && !error) {
+    if (open) {
+      setEditedText('');
+      setIsEditing(false);
+    }
+  }, [open, fieldKey]);
+
+  useEffect(() => {
+    if (open && fieldKey) {
       handleGenerate();
     }
-  }, [open]);
+  }, [open, fieldKey, contextText]);
 
   useEffect(() => {
     if (data) {
@@ -60,6 +67,7 @@ const AIHelper = ({
   const handleClose = () => {
     setIsEditing(false);
     setEditedText('');
+    reset();
     onClose();
   };
 

@@ -7,6 +7,7 @@ export function useOpenAI(): {
   error: string | null;
   loading: boolean;
   request: (params: OpenAIRequest) => Promise<void>;
+  reset: () => void;
 } {
   const [data, setData] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -28,5 +29,11 @@ export function useOpenAI(): {
     }
   }, []);
 
-  return { data, error, loading, request };
+  const reset = useCallback(() => {
+    setData(null);
+    setError(null);
+    setLoading(false);
+  }, []);
+
+  return { data, error, loading, request, reset };
 }

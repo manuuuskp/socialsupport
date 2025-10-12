@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useForm, Controller, type Control } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -166,7 +166,9 @@ const SituationInfo = () => {
         return context;
     };
 
-
+    const contextText = useMemo(() => {
+        return JSON.stringify(getContextText(currentField));
+    }, [currentField, formData, watchedValues]);
 
     return (
         <div className="page-container max-w-4xl">
@@ -214,7 +216,7 @@ const SituationInfo = () => {
                 onClose={() => setAIModalOpen(false)}
                 onAccept={handleAIAccept}
                 fieldKey={currentField}
-                contextText={JSON.stringify(getContextText(currentField))}
+                contextText={contextText}
                 tone="professional"
                 length="medium"
             />
