@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { resetForm } from '../store/socialSupportFormSlice';
-import { api } from '../services/api';
+import api from '../services/api';
 
 export const useSubmitSocialSupportForm = () => {
   const dispatch = useAppDispatch();

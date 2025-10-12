@@ -1,8 +1,7 @@
-import axios from 'axios';
+import { createAxiosInstance } from './axiosInterceptor';
 import { type OpenAIRequest } from '../types';
 import { fieldPrompts } from '../utils/constants/prompts';
 
-const OPENAI_API_URL = import.meta.env.VITE_OPENAPI_URL;
 const API_KEY = import.meta.env.VITE_OPENAI_KEY;
 
 interface ChatMessage {
@@ -18,30 +17,27 @@ interface OpenAIResponse {
   }>;
 }
 
-const retryWithBackoff = async <T>(
-  fn: () => Promise<T>,
-  maxRetries: number = 2,
-  baseDelay: number = 1000
-): Promise<T> => {
-  let attempt = 0;
-
-  while (attempt <= maxRetries) {
-    try {
-      return await fn();
-    } catch (error) {
-      attempt++;
-
-      if (attempt > maxRetries) {
-        throw error;
-      }
-
-      const delay = baseDelay * Math.pow(2, attempt - 1);
-      await new Promise(resolve => setTimeout(resolve, delay));
+const openaiApi = createAxiosInstance({
+  baseURL: '/api/openai',
+  headers: {
+    'Authorization': `Bearer ${API_KEY}`,
+    'Content-Type': 'application/json',
+  },
+  timeout: 10000,
+}, {
+  enableRetry: true,
+  maxRetries: 2,
+  retryDelay: 1000,
+  onError: async (error) => {
+    if (error.response?.status === 401) {
+      throw new Error('Invalid OpenAI API key. Please check your configuration.');
     }
+    if (error.response?.status === 429) {
+      throw new Error('Rate limit exceeded. Please try again in a moment.');
+    }
+    throw error;
   }
-
-  throw new Error('Maximum retries exceeded');
-};
+});
 
 export async function generateText({
   fieldKey,
@@ -91,57 +87,20 @@ Field: ${fieldKey}
     { role: 'user', content: userMessage }
   ];
 
-  const makeRequest = async () => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+  try {
+    const response = await openaiApi.post<OpenAIResponse>('/', {
+      model: 'gpt-3.5-turbo',
+      messages,
+      max_tokens: 500,
+      temperature: 0.7,
+    });
 
-    try {
-      const response = await axios.post<OpenAIResponse>(
-        OPENAI_API_URL,
-        {
-          model: 'gpt-3.5-turbo',
-          messages,
-          max_tokens: 500,
-          temperature: 0.7,
-        },
-        {
-          headers: {
-            'Authorization': `Bearer ${API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          signal: controller.signal,
-        }
-      );
-
-      clearTimeout(timeoutId);
-
-      if (!response.data.choices?.[0]?.message?.content) {
-        throw new Error('Invalid response from OpenAI API');
-      }
-
-      return response.data.choices[0].message.content.trim();
-    } catch (error) {
-      clearTimeout(timeoutId);
-
-      if (axios.isAxiosError(error)) {
-        if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
-          throw new Error('Request timed out. Please try again.');
-        }
-
-        if (error.response?.status === 401) {
-          throw new Error('Invalid OpenAI API key. Please check your configuration.');
-        }
-
-        if (error.response?.status === 429) {
-          throw new Error('Rate limit exceeded. Please try again in a moment.');
-        }
-
-        throw new Error(`OpenAI API error: ${error.response?.data?.error?.message || error.message}`);
-      }
-
-      throw error;
+    if (!response.data.choices?.[0]?.message?.content) {
+      throw new Error('Invalid response from OpenAI API');
     }
-  };
 
-  return retryWithBackoff(makeRequest);
+    return response.data.choices[0].message.content.trim();
+  } catch (error) {
+    throw error;
+  }
 }
