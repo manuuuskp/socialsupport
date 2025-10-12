@@ -6,14 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { updateStep } from '../../../store/socialSupportFormSlice';
 import AIHelper from '../../AIHelper';
+import { situtationFormSchema } from './situationFormSchema';
 
-const schema = yup.object({
-    financialSituation: yup.string().required('validation.required').min(20, 'validation.minLength'),
-    employmentCircumstances: yup.string().required('validation.required').min(20, 'validation.minLength'),
-    reasonForApplying: yup.string().required('validation.required').min(20, 'validation.minLength'),
-});
-
-type SituationFormData = yup.InferType<typeof schema>;
+type SituationFormData = yup.InferType<typeof situtationFormSchema>;
 
 const TextAreaFieldWithAI = ({
     name,
@@ -88,7 +83,7 @@ const TextAreaFieldWithAI = ({
 const SituationInfo = () => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
-    const formData = useAppSelector((state) => state.form.formData);
+    const formData = useAppSelector((state) => state.socialSupportForm.formData);
     const [aiModalOpen, setAIModalOpen] = useState(false);
     const [currentField, setCurrentField] = useState<string>('');
 
@@ -98,7 +93,7 @@ const SituationInfo = () => {
         setValue,
         formState: { errors },
     } = useForm<SituationFormData>({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(situtationFormSchema),
         defaultValues: formData.situation,
         mode: 'onChange',
     });

@@ -17,7 +17,7 @@ type PersonalFormData = yup.InferType<typeof personalFormSchema>;
 const PersonalInfo = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const formData = useAppSelector((state) => state.form.formData);
+  const formData = useAppSelector((state) => state.socialSupportForm.formData);
 
   const {
     control,

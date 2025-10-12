@@ -30,6 +30,11 @@ export type FormData = {
   };
 }
 
+export interface FormState {
+  formData: FormData;
+  currentStep: number;
+}
+
 export type StepKey = 'personal' | 'family' | 'situation';
 
 export interface OpenAIRequest {

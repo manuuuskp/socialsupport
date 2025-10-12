@@ -16,7 +16,7 @@ type FamilyFormData = yup.InferType<typeof familyFormSchema>;
 const FamilyInfo = () => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
-    const formData = useAppSelector((state) => state.form.formData);
+    const formData = useAppSelector((state) => state.socialSupportForm.formData);
 
     const {
         control,

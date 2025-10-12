@@ -1,11 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
-import formReducer from './socialSupportFormSlice';
+import socialSupportFormReducer, { formSliceName,} from './socialSupportFormSlice';
+import { persistMiddleware } from '../utils/middleware/persistMiddleware';
+import { loadFromLocalStorage } from '../utils/storage/storage';
+import type { FormState } from '../types';
+
+export interface RootState {
+  socialSupportForm: FormState;
+}
+
+const PERSISTED_SLICES: (keyof RootState)[] = [formSliceName];
+
+const preloadedState = loadFromLocalStorage<RootState>(PERSISTED_SLICES, {} as RootState);
 
 export const store = configureStore({
   reducer: {
-    form: formReducer,
-  }
+    socialSupportForm: socialSupportFormReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(persistMiddleware(PERSISTED_SLICES)),
+  preloadedState,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

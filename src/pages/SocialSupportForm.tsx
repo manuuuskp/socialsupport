@@ -9,12 +9,13 @@ import { personalFormSchema } from "../components/socialsupportform/personalInfo
 import FamilyInfo from "../components/socialsupportform/familyInfo/FamilyInfo";
 import { familyFormSchema } from "../components/socialsupportform/familyInfo/familyFormSchema";
 import SituationInfo from "../components/socialsupportform/situationInfo/SituationInfo";
+import { situtationFormSchema } from "../components/socialsupportform/situationInfo/situationFormSchema";
 
 const SocialSupportForm = () => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
     const TOTAL_STEPS = steps.length;
     const dispatch = useAppDispatch();
-    const { formData, currentStep } = useAppSelector(state => state.form);
+    const { formData, currentStep } = useAppSelector(state => state.socialSupportForm);
 
     const handleNext = () => {
         if (currentStep < TOTAL_STEPS - 1) {
@@ -43,6 +44,16 @@ const SocialSupportForm = () => {
             case 1:
                 try {
                     familyFormSchema.validateSync(formData.family, { abortEarly: false });
+                    return true;
+                } catch (error) {
+                    if (error instanceof yup.ValidationError) {
+                        console.log("Validation errors:", error.inner);
+                    }
+                    return false;
+                }
+            case 2:
+                try {
+                    situtationFormSchema.validateSync(formData.situation, { abortEarly: false });
                     return true;
                 } catch (error) {
                     if (error instanceof yup.ValidationError) {
