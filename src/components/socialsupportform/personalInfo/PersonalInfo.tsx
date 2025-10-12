@@ -55,6 +55,7 @@ const PersonalInfo = () => {
           
           <InputField
             name="nationalId"
+            type="number"
             label={t('form.step1.nationalId.label')}
             placeholder={t('form.step1.nationalId.placeholder')}
             error={!!errors.nationalId}

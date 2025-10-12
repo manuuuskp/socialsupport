@@ -1,15 +1,15 @@
 export type FormData = {
   personal: {
     name?: string;
-    nationalId?: string;
-    dob?: string;
+    nationalId?: number;
+    dob?: Date;
     gender?: string;
     address?: string;
     city?: string;
     state?: string;
     country?: string;
     phoneCountryCode?: string;
-    phone?: string;
+    phone?: number;
     email?: string;
   };
   family: {
@@ -17,6 +17,7 @@ export type FormData = {
     dependents?: number;
     employmentStatus?: string; // should be changed to literal types later
     monthlyIncome?: number;
+    incomeCurrency?: string;
     housingStatus?: string; // should be changed to literal types later
   };
   situation: {

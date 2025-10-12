@@ -8,22 +8,24 @@ export const personalFormSchema = yup.object({
     .min(2, 'validation.nameLength'),
 
   nationalId: yup
-    .string()
+    .number()
+    .typeError('validation.nationalIdNumber')
     .required('validation.required')
-    .matches(/^\d{15}$/, 'validation.nationalIdFormat'),
+    .test('length', 'validation.nationalIdFormat', (value) => {
+      return value ? value.toString().length === 15 : false;
+    }),
 
   dob: yup
-    .string()
+    .date()
+    .typeError('validation.dobInvalid')
     .required('validation.required')
-    .test("is-valid-date", 'validation.dobInvalid', (value) => !isNaN(Date.parse(value!)))
     .test("is-18+", 'validation.dobAge', (value) => {
       if (!value) return false;
-      const dob = new Date(value);
       const today = new Date();
-      const age = today.getFullYear() - dob.getFullYear();
+      const age = today.getFullYear() - value.getFullYear();
       const hasBirthdayPassed =
-        today.getMonth() > dob.getMonth() ||
-        (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+        today.getMonth() > value.getMonth() ||
+        (today.getMonth() === value.getMonth() && today.getDate() >= value.getDate());
       return age > 18 || (age === 18 && hasBirthdayPassed);
     }),
 
@@ -34,17 +36,17 @@ export const personalFormSchema = yup.object({
 
   address: yup
     .string()
-    .optional()
+    .notRequired()
     .min(5, 'validation.addressLength'),
 
   city: yup
     .string()
-    .optional()
+    .notRequired()
     .matches(/^[A-Za-z\s]+$/, 'validation.cityCharacters'),
 
   state: yup
     .string()
-    .optional()
+    .notRequired()
     .matches(/^[A-Za-z\s]+$/, 'validation.stateCharacters'),
 
   country: yup.string().required('validation.required'),
@@ -55,9 +57,12 @@ export const personalFormSchema = yup.object({
     .matches(/^\+\d{1,4}$/, "Invalid country code"),
 
   phone: yup
-    .string()
+    .number()
+    .typeError('validation.phoneNumber')
     .required('validation.required')
-    .matches(/^\d{7,12}$/, 'validation.phoneDigits'),
+    .test('length', 'validation.phoneDigits', (value) => {
+      return value ? value.toString().length >= 7 && value.toString().length <= 12 : false;
+    }),
 
   email: yup
     .string()
