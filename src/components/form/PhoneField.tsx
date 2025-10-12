@@ -49,7 +49,8 @@ const PhoneField = <T extends FieldValues>({
             value={field.value || ''}
             type="number"
             placeholder="Phone number"
-            className={error ? 'input-error flex-1' : 'input-default flex-1'}
+            className={`${error ? 'input-error flex-1' : 'input-default flex-1'} no-spinner`}
+            min={1}
           />
         )}
       />

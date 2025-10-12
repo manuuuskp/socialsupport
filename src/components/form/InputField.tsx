@@ -39,7 +39,7 @@ const InputField = <T extends FieldValues>({
             type={type}
             value={field.value || ''}
             placeholder={placeholder}
-            className={error ? 'input-error' : 'input-default'}
+            className={`${error ? 'input-error' : 'input-default'} ${type === 'number' ? 'no-spinner' : ''}`}
             aria-describedby={error ? `${name}-error` : undefined}
             min={type === 'number' ? min : undefined}
             step={type === 'number' ? step : undefined}

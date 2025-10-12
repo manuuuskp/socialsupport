@@ -53,10 +53,10 @@ const IncomeField = <T extends FieldValues>({
               field.onChange(value === '' ? null : Number(value));
             }}
             type="number"
-            min="0"
-            step="0.01"
+            min={0}
+            step={1}
             placeholder="Monthly income"
-            className={error ? 'input-error flex-1' : 'input-default flex-1'}
+            className={`${error ? 'input-error flex-1' : 'input-default flex-1'} no-spinner`}
           />
         )}
       />

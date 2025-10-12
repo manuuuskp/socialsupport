@@ -144,6 +144,16 @@
     .notification-info {
         @apply bg-blue-50 border border-blue-200 text-blue-800 px-4 py-4 rounded-md text-sm sm:py-3 sm:text-xs;
     }
+
+    .no-spinner::-webkit-outer-spin-button,
+    .no-spinner::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .no-spinner {
+        -moz-appearance: textfield;
+    }
 }
 
 @layer utilities {

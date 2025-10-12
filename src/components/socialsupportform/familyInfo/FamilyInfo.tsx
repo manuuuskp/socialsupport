@@ -66,6 +66,8 @@ const FamilyInfo = () => {
                         min={0}
                         step={1}
                         control={control}
+                        error={!!errors.dependents}
+                        helperText={errors.dependents ? t(errors.dependents.message as string) : ''}
                     />
                 </div>
 
