@@ -1,0 +1,184 @@
+{
+  "app": {
+    "title": "Social Support Application"
+  },
+  "language": {
+    "switch": "العربية",
+    "current": "English"
+  },
+  "form": {
+    "step1": {
+      "title": "Personal Information",
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name",
+        "error": "Full name is required"
+      },
+      "nationalId": {
+        "label": "National ID",
+        "placeholder": "Enter your national ID",
+        "error": "Valid national ID is required"
+      },
+      "dob": {
+        "label": "Date of Birth",
+        "error": "Date of birth is required"
+      },
+      "gender": {
+        "label": "Gender",
+        "placeholder": "Select your gender",
+        "options": {
+          "male": "Male",
+          "female": "Female",
+          "other": "Other"
+        }
+      },
+      "address": {
+        "label": "Address",
+        "placeholder": "Enter your address"
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "Enter your city"
+      },
+      "state": {
+        "label": "State",
+        "placeholder": "Enter your state"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Select your country"
+      },
+      "phoneCountryCode": {
+        "label": "Country Code",
+        "placeholder": "Select country code",
+        "error": "Country code is required"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "error": "Valid phone number is required"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address",
+        "error": "Valid email address is required"
+      }
+    },
+    "step2": {
+      "title": "Family Information",
+      "maritalStatus": {
+        "label": "Marital Status",
+        "placeholder": "Select your marital status",
+        "options": {
+          "single": "Single",
+          "married": "Married",
+          "widowed": "Widowed",
+          "divorced": "Divorced"
+        }
+      },
+      "dependents": {
+        "label": "Number of Dependents",
+        "placeholder": "Enter number of dependents"
+      },
+      "employmentStatus": {
+        "label": "Employment Status",
+        "placeholder": "Select your employment status",
+        "options": {
+          "employed": "Employed",
+          "unemployed": "Unemployed",
+          "self-employed": "Self-Employed",
+          "student": "Student"
+        }
+      },
+      "incomeCurrency": {
+        "label": "Income Currency",
+        "placeholder": "Select currency",
+        "error": "Currency is required"
+      },
+      "monthlyIncome": {
+        "label": "Monthly Income",
+        "placeholder": "Enter your monthly income"
+      },
+      "housingStatus": {
+        "label": "Housing Status",
+        "placeholder": "Select your housing status",
+        "options": {
+          "owned": "Owned",
+          "rented": "Rented",
+          "shelter": "Shelter",
+          "homeless": "Homeless"
+        }
+      }
+    },
+    "step3": {
+      "title": "Your Situation",
+      "financialSituation": {
+        "label": "Financial Situation",
+        "placeholder": "Describe your current financial situation...",
+        "helpText": "Please provide details about your financial hardships, debts, or challenges."
+      },
+      "employmentCircumstances": {
+        "label": "Employment Circumstances",
+        "placeholder": "Describe your employment situation...",
+        "helpText": "Include information about job loss, reduced hours, or inability to work."
+      },
+      "reasonForApplying": {
+        "label": "Reason for Applying",
+        "placeholder": "Explain why you need financial assistance...",
+        "helpText": "Describe what specific help you need and how it will benefit you and your family."
+      },
+      "helpButton": "Help Me Write",
+      "aiModal": {
+        "title": "AI Writing Assistant",
+        "description": "Our AI assistant has generated a suggestion based on your information. You can accept it as is, edit it, or discard it.",
+        "accept": "Accept Suggestion",
+        "edit": "Edit Suggestion",
+        "discard": "Discard",
+        "cancel": "Cancel",
+        "generating": "Generating suggestion...",
+        "error": "Failed to generate suggestion. Please try again.",
+        "describeYourSituation": "Describe your situation in detail",
+        "regenerate": "Regenerate",
+        "tryAgain": "Try Again"
+      }
+    },
+    "progress": {
+      "step": "Step {{current}} of {{total}}"
+    },
+    "submission": {
+      "success": "Form submitted successfully!",
+      "failure": "Failed to submit form. Please try again."
+    }
+  },
+  "buttons": {
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "submit": "Submit",
+    "aiHelper": "AI Helper"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "phone": "Please enter a valid phone number",
+    "minLength": "Must be at least 30 characters",
+    "maxLength": "Must be no more than {{max}} characters",
+    "nameMismatch": "Name must contain only letters and spaces",
+    "nameLength": "Name must be at least 2 characters long",
+    "nationalIdFormat": "National ID must be 15 digits (Emirates ID format)",
+    "dobInvalid": "Invalid date format",
+    "dobAge": "You must be at least 18 years old",
+    "genderInvalid": "Invalid gender selection",
+    "addressLength": "Address must be at least 5 characters long",
+    "cityCharacters": "City must contain only letters and spaces",
+    "stateCharacters": "State must contain only letters and spaces",
+    "phoneDigits": "Phone number must be between 7 and 12 digits",
+    "dependentsNumber": "Dependents must be a number between 0 and 20",
+    "incomePositive": "Monthly income must be a positive number",
+    "incomeMax": "Please enter a valid income",
+    "currencyFormat": "Invalid currency code",
+    "maritalStatusInvalid": "Invalid marital status selection",
+    "employmentStatusInvalid": "Invalid employment status selection",
+    "housingStatusInvalid": "Invalid housing status selection"
+  }
+}
