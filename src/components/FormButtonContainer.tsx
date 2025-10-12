@@ -15,11 +15,11 @@ const FormButtonContainer = ({ currentStep, steps, isValidStep, isSubmitting, ha
     const { t } = useTranslation();
 
     return (
-        <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8 pt-4 border-t border-gray-200">
+        <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8 pt-6 pb-4 sm:pb-0 border-t border-gray-200 mobile-button-spacing">
             <button
                 onClick={handlePrevious}
                 disabled={currentStep === 0}
-                className={`${currentStep === 0 ? 'invisible' : ''} inline-flex items-center justify-center px-3 sm:px-4 py-2 border border-gray-300 shadow-sm text-xs sm:text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed`}
+                className={`${currentStep === 0 ? 'hidden' : ''} inline-flex items-center justify-center px-3 sm:px-4 py-2 border border-gray-300 shadow-sm text-xs sm:text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed`}
             >
                 <span className="hidden sm:inline">{t('buttons.previous')}</span>
                 <span className="sm:hidden">{t('buttons.back')}</span>
