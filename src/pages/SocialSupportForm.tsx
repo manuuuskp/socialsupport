@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { ToastContainer } from 'react-toastify';
 import ApplicationForm from "../components/ApplicationForm";
 import FormButtonContainer from "../components/FormButtonContainer";
 import ProgressBar from "../components/ProgressBar";
@@ -10,12 +11,15 @@ import FamilyInfo from "../components/socialsupportform/familyInfo/FamilyInfo";
 import { familyFormSchema } from "../components/socialsupportform/familyInfo/familyFormSchema";
 import SituationInfo from "../components/socialsupportform/situationInfo/SituationInfo";
 import { situtationFormSchema } from "../components/socialsupportform/situationInfo/situationFormSchema";
+import { useSubmitSocialSupportForm } from "../hooks/useSubmitSocialSupportForm";
+import 'react-toastify/dist/ReactToastify.css';
 
 const SocialSupportForm = () => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
     const TOTAL_STEPS = steps.length;
     const dispatch = useAppDispatch();
     const { formData, currentStep } = useAppSelector(state => state.socialSupportForm);
+    const { submitForm } = useSubmitSocialSupportForm();
 
     const handleNext = () => {
         if (currentStep < TOTAL_STEPS - 1) {
@@ -74,9 +78,10 @@ const SocialSupportForm = () => {
             <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 md:p-8 mb-8">
                 <div className="min-h-[300px] sm:min-h-[400px]">
                     {renderCurrentStep()}
-                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={false} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={() => { }} />
+                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={false} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={submitForm} />
                 </div>
             </div>
+            <ToastContainer position="bottom-left" autoClose={5000} />
         </ApplicationForm>
     )
 }

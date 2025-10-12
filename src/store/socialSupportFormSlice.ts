@@ -27,9 +27,13 @@ const socialSupportFormSlice = createSlice({
       state.formData[step] = { ...state.formData[step], ...data };
       state.formData.meta = { ...state.formData.meta, lastSavedAt: new Date().toISOString() };
     },
+    resetForm: (state) => {
+      state.formData = initialFormData;
+      state.currentStep = 0;
+    }
   },
 });
 
-export const { setCurrentStep, updateStep } = socialSupportFormSlice.actions;
+export const { setCurrentStep, updateStep, resetForm } = socialSupportFormSlice.actions;
 
 export default socialSupportFormSlice.reducer;
