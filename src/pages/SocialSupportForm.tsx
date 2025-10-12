@@ -71,10 +71,12 @@ const SocialSupportForm = () => {
 
     return (
         <ApplicationForm>
-            <ProgressBar currentStep={currentStep}
-                totalSteps={TOTAL_STEPS}
-                steps={steps}
-                onStepClick={(step) => dispatch(setCurrentStep(step))} />
+            {
+                steps.length > 0 && <ProgressBar currentStep={currentStep}
+                    totalSteps={TOTAL_STEPS}
+                    steps={steps}
+                    onStepClick={(step) => dispatch(setCurrentStep(step))} />
+            }
 
             <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 md:p-8 mb-8">
                 <div className="min-h-[300px] sm:min-h-[400px]">
