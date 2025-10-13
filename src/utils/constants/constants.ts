@@ -36,3 +36,6 @@ export const CURRENCIES = [
   { value: 'SGD', label: 'SGD (Singapore Dollar)', symbol: 'SGD' },
   { value: 'JPY', label: 'JPY (Japanese Yen)', symbol: 'JPY' },
 ];
+
+
+export const RTL_LANG_LIST = ['ar'];

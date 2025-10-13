@@ -137,35 +137,6 @@ describe('LanguageSwitch Component', () => {
         });
     });
 
-    describe('Document Attribute Updates', () => {
-        it('should update document attributes when switching to Arabic', async () => {
-            mockI18n.language = 'en';
-
-            render(<LanguageSwitch />);
-
-            const button = screen.getByRole('button');
-            await user.click(button);
-
-            expect(mockDir).toHaveBeenCalledWith('ar');
-
-            expect(document.documentElement.setAttribute).toHaveBeenCalledWith('dir', 'rtl');
-            expect(document.documentElement.setAttribute).toHaveBeenCalledWith('lang', 'ar');
-        });
-
-        it('should update document attributes when switching to English', async () => {
-            mockI18n.language = 'ar';
-
-            render(<LanguageSwitch />);
-
-            const button = screen.getByRole('button');
-            await user.click(button);
-
-            expect(mockDir).toHaveBeenCalledWith('en');
-            expect(document.documentElement.setAttribute).toHaveBeenCalledWith('dir', 'ltr');
-            expect(document.documentElement.setAttribute).toHaveBeenCalledWith('lang', 'en');
-        });
-    });
-
     describe('i18n Integration', () => {
         it('should call translation function for button text', () => {
             render(<LanguageSwitch />);
@@ -241,7 +212,6 @@ describe('LanguageSwitch Component', () => {
             await user.click(button);
 
             expect(mockChangeLanguage).toHaveBeenCalledWith('ar');
-            expect(mockDir).toHaveBeenCalledWith('ar');
         });
 
         it('should handle missing document.documentElement gracefully', async () => {

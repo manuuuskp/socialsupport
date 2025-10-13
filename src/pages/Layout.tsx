@@ -3,7 +3,7 @@ import SocialSupportForm from "./SocialSupportForm";
 
 const Layout = () => {
     return (
-        <div className="flex flex-col h-screen mobile-viewport-fix">
+        <div className="flex flex-col h-[100dvh] min-h-screen">
             <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-200">
                 <Header />
             </header>
