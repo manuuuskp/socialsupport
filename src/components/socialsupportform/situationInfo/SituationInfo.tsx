@@ -62,8 +62,8 @@ const SituationInfo = () => {
   const contextText = useMemo(() => getContextText(currentField), [currentField, formData, watchedValues, userPrompt, i18n.language]);
 
   return (
-    <div className="px-4 py-6 max-w-4xl mx-auto">
-      <h1 className="text-xl font-semibold mb-4">{t('form.step3.title')}</h1>
+    <div className="page-container">
+      <h1 className="page-title">{t('form.step3.title')}</h1>
 
       <form className="space-y-6">
         {['financialSituation', 'employmentCircumstances', 'reasonForApplying'].map((field) => (
