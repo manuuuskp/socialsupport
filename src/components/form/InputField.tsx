@@ -38,9 +38,12 @@ const InputField = <T extends FieldValues>({
             id={name}
             type={type}
             value={field.value ?? ''}
+            onKeyDown={(e) => {
+              if (type === 'number' && (e.key === '.' || e.key === ',')) e.preventDefault();
+            }}
             onChange={(e) => {
               const value = e.target.value;
-              if(type === 'number') {
+              if (type === 'number') {
                 field.onChange(value === '' ? null : Number(value));
               } else {
                 field.onChange(value);

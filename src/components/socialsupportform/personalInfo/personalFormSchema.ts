@@ -3,6 +3,7 @@ import * as yup from "yup";
 export const personalFormSchema = yup.object({
   name: yup
     .string()
+    .trim()
     .required('validation.required')
     .matches(/^[A-Za-z\s]+$/, 'validation.nameMismatch')
     .min(2, 'validation.nameLength'),
@@ -37,6 +38,7 @@ export const personalFormSchema = yup.object({
 
   address: yup
     .string()
+    .trim()
     .notRequired()
     .min(5, 'validation.addressLength'),
 
@@ -47,10 +49,11 @@ export const personalFormSchema = yup.object({
 
   state: yup
     .string()
+    .trim()
     .notRequired()
     .matches(/^[A-Za-z\s]*$/, 'validation.stateCharacters'),
 
-  country: yup.string().required('validation.required'),
+  country: yup.string().trim().required('validation.required'),
 
   phoneCountryCode: yup
     .string()

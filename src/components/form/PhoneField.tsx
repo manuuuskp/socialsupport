@@ -10,11 +10,11 @@ interface PhoneFieldProps<T extends FieldValues> {
   countryCodes: { value: string; label: string }[];
 }
 
-const PhoneField = <T extends FieldValues>({ 
+const PhoneField = <T extends FieldValues>({
   countryCodeName,
   phoneName,
-  label, 
-  error, 
+  label,
+  error,
   helperText,
   control,
   countryCodes
@@ -50,6 +50,9 @@ const PhoneField = <T extends FieldValues>({
             onChange={(e) => {
               const value = e.target.value;
               field.onChange(value === '' ? null : Number(value));
+            }}
+            onKeyDown={(e) => {
+              if (e.key === '.' || e.key === ',') e.preventDefault();
             }}
             type="number"
             placeholder="Phone number"
