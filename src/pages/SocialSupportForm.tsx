@@ -72,7 +72,7 @@ const SocialSupportForm = () => {
     return (
         <ApplicationForm>
             {
-                steps.length > 0 && <ProgressBar currentStep={currentStep}
+                steps.length > 1 && <ProgressBar currentStep={currentStep}
                     totalSteps={TOTAL_STEPS}
                     steps={steps}
                     onStepClick={(step) => dispatch(setCurrentStep(step))} />

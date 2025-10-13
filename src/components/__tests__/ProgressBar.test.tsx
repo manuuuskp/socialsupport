@@ -223,8 +223,8 @@ describe('ProgressBar Component', () => {
         it('should have aria-live region for progress text', () => {
             render(<ProgressBar {...defaultProps} />);
 
-            const progressText = screen.getByText('Step 2 of 3');
-            expect(progressText).toHaveAttribute('aria-live', 'polite');
+            const liveRegion = screen.getByRole('status');
+            expect(liveRegion).toHaveAttribute('aria-live', 'polite');
         });
 
         it('should disable future steps properly', () => {
