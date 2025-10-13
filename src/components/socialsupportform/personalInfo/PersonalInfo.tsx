@@ -106,6 +106,8 @@ const PersonalInfo = () => {
             label={t('form.step1.city.label')}
             placeholder={t('form.step1.city.placeholder')}
             control={control}
+            error={!!errors.city}
+            helperText={errors.city ? t(errors.city.message as string) : ''}
           />
           
           <InputField
@@ -113,6 +115,8 @@ const PersonalInfo = () => {
             label={t('form.step1.state.label')}
             placeholder={t('form.step1.state.placeholder')}
             control={control}
+            error={!!errors.state}
+            helperText={errors.state ? t(errors.state.message as string) : ''}
           />
           
           <SelectField

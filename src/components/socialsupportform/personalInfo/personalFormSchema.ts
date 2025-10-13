@@ -42,12 +42,12 @@ export const personalFormSchema = yup.object({
   city: yup
     .string()
     .notRequired()
-    .matches(/^[A-Za-z\s]+$/, 'validation.cityCharacters'),
+    .matches(/^[A-Za-z\s]*$/, 'validation.cityCharacters'),
 
   state: yup
     .string()
     .notRequired()
-    .matches(/^[A-Za-z\s]+$/, 'validation.stateCharacters'),
+    .matches(/^[A-Za-z\s]*$/, 'validation.stateCharacters'),
 
   country: yup.string().required('validation.required'),
 
