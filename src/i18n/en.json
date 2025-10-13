@@ -166,6 +166,7 @@
     "nameMismatch": "Name must contain only letters and spaces",
     "nameLength": "Name must be at least 2 characters long",
     "nationalIdFormat": "National ID must be 15 digits (Emirates ID format)",
+    "nationalIdPositive": "National ID should be greater than 0",
     "dobInvalid": "Invalid date format",
     "dobAge": "You must be at least 18 years old",
     "genderInvalid": "Invalid gender selection",

@@ -37,7 +37,7 @@ const InputField = <T extends FieldValues>({
             {...field}
             id={name}
             type={type}
-            value={field.value || ''}
+            value={field.value ?? ''}
             onChange={(e) => {
               const value = e.target.value;
               if(type === 'number') {

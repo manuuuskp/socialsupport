@@ -23,7 +23,7 @@ const FamilyInfo = () => {
         watch,
         formState: { errors },
     } = useForm<FamilyFormData>({
-        resolver: yupResolver(familyFormSchema) as any,
+        resolver: yupResolver(familyFormSchema),
         defaultValues: formData.family,
         mode: 'onChange',
     });

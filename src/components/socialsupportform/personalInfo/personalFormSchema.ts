@@ -11,6 +11,7 @@ export const personalFormSchema = yup.object({
     .number()
     .typeError('validation.nationalIdNumber')
     .required('validation.required')
+    .min(0, 'validation.nationalIdPositive')
     .test('length', 'validation.nationalIdFormat', (value) => {
       return value ? value.toString().length === 15 : false;
     }),
