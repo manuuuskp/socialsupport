@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { resetForm } from '../store/socialSupportFormSlice';
 import api from '../services/api';
+import { removeAppStateSlice } from '../utils/storage/storage';
 
 export const useSubmitSocialSupportForm = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ export const useSubmitSocialSupportForm = () => {
 
       dispatch(resetForm());
 
-      localStorage.removeItem('socialSupportForm');
+      removeAppStateSlice("socialSupportForm");
 
       toast.success(t('form.submission.success'));
 

@@ -37,3 +37,19 @@ export const clearAppState = (): void => {
     console.warn('Failed to clear app state:', error);
   }
 };
+
+export const removeAppStateSlice = (sliceKey: string): void => {
+  try {
+    const data = localStorage.getItem('appState');
+    if (!data) return;
+
+    const parsed = JSON.parse(data);
+    if (parsed && typeof parsed === 'object' && sliceKey in parsed) {
+      delete parsed[sliceKey];
+      localStorage.setItem('appState', JSON.stringify(parsed));
+    }
+  } catch (error) {
+    console.warn(`Failed to remove slice "${sliceKey}" from app state:`, error);
+  }
+};
+
