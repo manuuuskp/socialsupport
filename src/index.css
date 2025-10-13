@@ -155,12 +155,7 @@
         transform: translateZ(0);
     }
 
-    @media (max-width: 640px) {
-        .mobile-viewport-fix {
-            height: 100dvh;
-            height: 100vh; 
-        }
-        
+    @media (max-width: 640px) {        
         .mobile-button-spacing {
             margin-bottom: max(20px, env(safe-area-inset-bottom, 0px));
         }
