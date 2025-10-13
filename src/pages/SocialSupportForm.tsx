@@ -20,7 +20,7 @@ const SocialSupportForm = () => {
     const TOTAL_STEPS = steps.length;
     const dispatch = useAppDispatch();
     const { formData, currentStep } = useAppSelector(state => state.socialSupportForm);
-    const { submitForm } = useSubmitSocialSupportForm();
+    const { isSubmitting, submitForm } = useSubmitSocialSupportForm();
 
     const handleNext = () => {
         if (currentStep < TOTAL_STEPS - 1) {
@@ -81,7 +81,7 @@ const SocialSupportForm = () => {
             <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 md:p-8 mb-8">
                 <div className="min-h-[300px] sm:min-h-[400px]">
                     {renderCurrentStep()}
-                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={false} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={submitForm} />
+                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={isSubmitting} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={submitForm} />
                 </div>
             </div>
             <ToastContainer rtl={i18n.dir(i18n.language) === 'rtl'} position="bottom-left" autoClose={1500} />
