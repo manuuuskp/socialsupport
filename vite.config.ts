@@ -11,5 +11,23 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/openai\/?/, ''),
       },
     },
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          redux: ['@reduxjs/toolkit', 'react-redux'],
+          i18n: ['react-i18next', 'i18next'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    cssCodeSplit: true,
+    minify: 'terser',
+    sourcemap: false,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-redux', '@reduxjs/toolkit', 'react-i18next'],
+  },
 })

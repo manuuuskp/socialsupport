@@ -31,7 +31,14 @@ const PersonalInfo = () => {
 
   useEffect(() => {
     const subscription = watch((value) => {
-      dispatch(updateStep({ step: 'personal', data: value }));
+      const trimmedValue = Object.fromEntries(
+        Object.entries(value).map(([key, val]) => [
+          key,
+          typeof val === 'string' ? val.trim() : val,
+        ])
+      );
+
+      dispatch(updateStep({ step: 'personal', data: trimmedValue }));
     });
     return () => subscription.unsubscribe();
   }, [watch, dispatch]);
@@ -52,7 +59,7 @@ const PersonalInfo = () => {
             helperText={errors.name ? t(errors.name.message as string) : ''}
             control={control}
           />
-          
+
           <InputField
             name="nationalId"
             type="number"
@@ -74,7 +81,7 @@ const PersonalInfo = () => {
             helperText={errors.dob ? t(errors.dob.message as string) : ''}
             control={control}
           />
-          
+
           <SelectField
             name="gender"
             label={t('form.step1.gender.label')}
@@ -109,7 +116,7 @@ const PersonalInfo = () => {
             error={!!errors.city}
             helperText={errors.city ? t(errors.city.message as string) : ''}
           />
-          
+
           <InputField
             name="state"
             label={t('form.step1.state.label')}
@@ -118,7 +125,7 @@ const PersonalInfo = () => {
             error={!!errors.state}
             helperText={errors.state ? t(errors.state.message as string) : ''}
           />
-          
+
           <SelectField
             name="country"
             label={t('form.step1.country.label')}
@@ -140,7 +147,7 @@ const PersonalInfo = () => {
             control={control}
             countryCodes={COUNTRY_CODES}
           />
-          
+
           <InputField
             name="email"
             type="email"
