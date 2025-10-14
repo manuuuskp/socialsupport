@@ -51,7 +51,6 @@ const SocialSupportForm = () => {
             }
             return true;
         } catch (error) {
-            if (error instanceof yup.ValidationError) console.log("Validation errors:", error.inner);
             return false;
         }
     };

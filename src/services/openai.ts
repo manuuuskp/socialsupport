@@ -29,15 +29,6 @@ const openaiApi = createAxiosInstance({
   enableRetry: true,
   maxRetries: 2,
   retryDelay: 1000,
-  onError: async (error) => {
-    if (error.response?.status === 401) {
-      throw new Error('Invalid OpenAI API key. Please check your configuration.');
-    }
-    if (error.response?.status === 429) {
-      throw new Error('Rate limit exceeded. Please try again in a moment.');
-    }
-    throw error;
-  }
 });
 
 export async function generateText({
