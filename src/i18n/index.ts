@@ -21,9 +21,6 @@ i18n
     resources,
     lng: 'en',
     fallbackLng: 'en',
-    interpolation: {
-      escapeValue: false,
-    },
     react: {
       useSuspense: false,
     },
