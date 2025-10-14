@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { generateText } from '../services/openai';
-import { type OpenAIRequest } from '../types';
+import { type OpenAIRequest } from '../types/types';
 
 export function useOpenAI(): {
   data: string | null;

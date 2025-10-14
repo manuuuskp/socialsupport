@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { FormData, FormState, StepKey } from '../types';
+import type { FormData, FormState, StepKey } from '../types/types';
 
 export const formSliceName = 'socialSupportForm';
 

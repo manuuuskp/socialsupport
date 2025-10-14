@@ -1,5 +1,5 @@
 import { createAxiosInstance } from './axiosInterceptor';
-import { type OpenAIRequest } from '../types';
+import { type OpenAIRequest } from '../types/types';
 import { fieldPrompts } from '../utils/constants/prompts';
 import { buildSystemPrompt, buildUserPrompt } from '../utils/prompts/buildPrompts';
 
