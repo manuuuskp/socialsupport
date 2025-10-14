@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import socialSupportFormReducer, { formSliceName,} from './socialSupportFormSlice';
 import { persistMiddleware } from '../utils/middleware/persistMiddleware';
 import { loadFromLocalStorage } from '../utils/storage/storage';
-import type { FormState } from '../types';
+import type { FormState } from '../types/types';
 
 export interface RootState {
   socialSupportForm: FormState;

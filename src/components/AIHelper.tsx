@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOpenAI } from '../hooks/useOpenAI';
-import { type OpenAIRequest } from '../types';
+import { type OpenAIRequest } from '../types/types';
 import ModalWrapper from './ModalWrapper';
 
 interface AIHelperProps {

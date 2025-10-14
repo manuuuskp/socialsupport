@@ -1,4 +1,4 @@
-import type { OpenAIRequest } from "../../types"
+import type { OpenAIRequest } from "../../types/types"
 
 export const buildSystemPrompt = ({ tone, length, fieldKey, language }: OpenAIRequest) => {
     return `You are a helpful assistant that writes first-person, professional financial assistance applications. 
