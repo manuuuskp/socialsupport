@@ -56,11 +56,6 @@ describe('App Component', () => {
   describe('Component Rendering', () => {
     it('should render without crashing', () => {
       render(<App />);
-      expect(screen.getByTestId('mock-layout')).toBeInTheDocument();
-    });
-
-    it('should render Layout component inside Redux Provider', () => {
-      render(<App />);
       const layout = screen.getByTestId('mock-layout');
       expect(layout).toBeInTheDocument();
       expect(layout).toHaveTextContent('Layout Component');
