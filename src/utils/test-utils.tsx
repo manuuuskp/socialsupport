@@ -47,7 +47,7 @@ i18n.init({
         'validation.stateCharacters': 'State can only contain letters and spaces',
         'validation.phoneDigits': 'Phone number must be 7-12 digits',
         'validation.email': 'Please enter a valid email address',
-        'validation.minLength': 'Must be at least 30 characters',
+        'validation.minLength': 'Must be at least 15 characters',
         'form.step3.title': 'Situation Information',
         'form.step3.financialSituation.label': 'Financial Situation',
         'form.step3.financialSituation.placeholder': 'Describe your current financial situation',

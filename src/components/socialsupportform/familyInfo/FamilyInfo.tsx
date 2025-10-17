@@ -70,46 +70,48 @@ const FamilyInfo = () => {
                         helperText={errors.dependents ? t(errors.dependents.message as string) : ''}
                     />
                 </div>
+                <div className="form-grid-2">
+                    <SelectField
+                        name="employmentStatus"
+                        label={t('form.step2.employmentStatus.label')}
+                        placeholder={t('form.step2.employmentStatus.placeholder')}
+                        options={[
+                            { value: 'employed', label: t('form.step2.employmentStatus.options.employed') },
+                            { value: 'unemployed', label: t('form.step2.employmentStatus.options.unemployed') },
+                            { value: 'self-employed', label: t('form.step2.employmentStatus.options.self-employed') },
+                            { value: 'student', label: t('form.step2.employmentStatus.options.student') },
+                        ]}
+                        error={!!errors.employmentStatus}
+                        helperText={errors.employmentStatus ? t(errors.employmentStatus.message as string) : ''}
+                        control={control}
+                    />
 
-                <SelectField
-                    name="employmentStatus"
-                    label={t('form.step2.employmentStatus.label')}
-                    placeholder={t('form.step2.employmentStatus.placeholder')}
-                    options={[
-                        { value: 'employed', label: t('form.step2.employmentStatus.options.employed') },
-                        { value: 'unemployed', label: t('form.step2.employmentStatus.options.unemployed') },
-                        { value: 'self-employed', label: t('form.step2.employmentStatus.options.self-employed') },
-                        { value: 'student', label: t('form.step2.employmentStatus.options.student') },
-                    ]}
-                    error={!!errors.employmentStatus}
-                    helperText={errors.employmentStatus ? t(errors.employmentStatus.message as string) : ''}
-                    control={control}
-                />
-
-                <IncomeField
-                    currencyName="incomeCurrency"
-                    incomeName="monthlyIncome"
-                    label={t('form.step2.monthlyIncome.label')}
-                    error={!!errors.monthlyIncome || !!errors.incomeCurrency}
-                    helperText={errors.monthlyIncome ? t(errors.monthlyIncome.message as string) : errors.incomeCurrency ? t(errors.incomeCurrency.message as string) : ''}
-                    control={control}
-                    currencies={CURRENCIES}
-                />
-
-                <SelectField
-                    name="housingStatus"
-                    label={t('form.step2.housingStatus.label')}
-                    placeholder={t('form.step2.housingStatus.placeholder')}
-                    options={[
-                        { value: 'owned', label: t('form.step2.housingStatus.options.owned') },
-                        { value: 'rented', label: t('form.step2.housingStatus.options.rented') },
-                        { value: 'shelter', label: t('form.step2.housingStatus.options.shelter') },
-                        { value: 'homeless', label: t('form.step2.housingStatus.options.homeless') },
-                    ]}
-                    error={!!errors.housingStatus}
-                    helperText={errors.housingStatus ? t(errors.housingStatus.message as string) : ''}
-                    control={control}
-                />
+                    <IncomeField
+                        currencyName="incomeCurrency"
+                        incomeName="monthlyIncome"
+                        label={t('form.step2.monthlyIncome.label')}
+                        error={!!errors.monthlyIncome || !!errors.incomeCurrency}
+                        helperText={errors.monthlyIncome ? t(errors.monthlyIncome.message as string) : errors.incomeCurrency ? t(errors.incomeCurrency.message as string) : ''}
+                        control={control}
+                        currencies={CURRENCIES}
+                    />
+                </div>
+                <div className="form-grid-2">
+                    <SelectField
+                        name="housingStatus"
+                        label={t('form.step2.housingStatus.label')}
+                        placeholder={t('form.step2.housingStatus.placeholder')}
+                        options={[
+                            { value: 'owned', label: t('form.step2.housingStatus.options.owned') },
+                            { value: 'rented', label: t('form.step2.housingStatus.options.rented') },
+                            { value: 'shelter', label: t('form.step2.housingStatus.options.shelter') },
+                            { value: 'homeless', label: t('form.step2.housingStatus.options.homeless') },
+                        ]}
+                        error={!!errors.housingStatus}
+                        helperText={errors.housingStatus ? t(errors.housingStatus.message as string) : ''}
+                        control={control}
+                    />
+                </div>
             </form>
         </div>
     );

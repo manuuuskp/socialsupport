@@ -24,7 +24,7 @@ const TextAreaFieldWithAI = ({ name, label, placeholder, helpText, rows = 4, con
             <div className="flex justify-between items-center">
                 <label htmlFor={name} className="font-medium">{label}</label>
                 <button type="button" onClick={() => onAIHelp(name)} className="text-sm text-blue-600 hover:underline">
-                    {t('AI Help')}
+                    {t('buttons.aiHelper')}
                 </button>
             </div>
 
