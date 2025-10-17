@@ -37,7 +37,7 @@ describe('SituationInfo Component', () => {
 
     it('should render AI Help buttons for each field', () => {
       renderSituationInfo();
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       expect(aiHelpButtons).toHaveLength(3);
     });
 
@@ -138,7 +138,7 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
       expect(screen.getByTestId('ai-helper-modal')).toBeInTheDocument();
@@ -149,7 +149,7 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
       const acceptButton = screen.getByText('Accept');
@@ -163,7 +163,7 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
       expect(screen.getByTestId('ai-helper-modal')).toBeInTheDocument();
@@ -180,7 +180,7 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       
       // Test first field
       await user.click(aiHelpButtons[0]);
@@ -242,7 +242,7 @@ describe('SituationInfo Component', () => {
     it('should have accessible buttons', () => {
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByRole('button', { name: /ai help/i });
+      const aiHelpButtons = screen.getAllByRole('button', { name: /help me write/i });
       expect(aiHelpButtons).toHaveLength(3);
       
       aiHelpButtons.forEach(button => {

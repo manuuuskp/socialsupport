@@ -58,7 +58,7 @@ i18n.init({
         'form.step3.reasonForApplying.label': 'Reason for Applying',
         'form.step3.reasonForApplying.placeholder': 'Explain why you are applying for support',
         'form.step3.reasonForApplying.helpText': 'Please explain why you need social support',
-        'AI Help': 'AI Help',
+        'buttons.aiHelper': 'Help Me Write',
       },
     },
   },
