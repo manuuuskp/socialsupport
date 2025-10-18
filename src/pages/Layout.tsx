@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
 import SuccessPage from "./SuccessPage";
+import NotFound from "./NotFound";
 
 const SocialSupportForm = lazy(() => import("./SocialSupportForm"));
 
@@ -20,6 +21,7 @@ const Layout = () => {
                     <Routes>
                         <Route path="/" element={<SocialSupportForm />} />
                         <Route path="/success/:applicationId" element={<SuccessPage />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Suspense>
             </main>
