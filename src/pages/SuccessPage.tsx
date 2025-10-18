@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -6,9 +7,23 @@ const SuccessPage = () => {
     const { applicationId } = useParams<{ applicationId: string }>();
     const navigate = useNavigate();
 
+    const validIds = sessionStorage.getItem('validApplicationIds');
+    const validApplicationIds = validIds ? JSON.parse(validIds) : [];
+
+    useEffect(() => {
+        if (!applicationId || !validApplicationIds.includes(applicationId)) {
+            navigate('/', { replace: true });
+            return;
+        }
+    }, [applicationId, navigate]);
+
     const handleNavigateToForm = () => {
         navigate('/');
     };
+
+    if (!applicationId || !validApplicationIds.includes(applicationId)) {
+        return null;
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

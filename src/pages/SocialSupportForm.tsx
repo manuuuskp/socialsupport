@@ -26,6 +26,7 @@ const SocialSupportForm = () => {
     const handleSubmit = async () => {
         const applicationId = await submitForm();
         if (applicationId) {
+            sessionStorage.setItem('validApplicationIds', JSON.stringify([applicationId]));
             navigate(`/success/${applicationId}`);
         }
     };
