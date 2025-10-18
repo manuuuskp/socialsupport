@@ -199,6 +199,15 @@
     "clearCache": "Please try refreshing your browser or clearing your cache.",
     "tryAgain": "Try Again",
     "goHome": "Go to Homepage",
-    "contactSupport": "If the problem persists, please contact our support team."
+    "contactSupport": "If the problem persists, please contact our support team.",
+    "network": "Network error. Please check your connection.",
+    "auth": "Authentication failed. Please check your credentials.",
+    "forbidden": "Access denied. You do not have permission.",
+    "notFound": "The requested resource was not found.",
+    "server": "Server error. Please try again later.",
+    "openAIInvalidKey": "Invalid OpenAI API key. Please check your configuration.",
+    "unknown": "Unknown error occurred.",
+    "configureKey": "OpenAI API key is not configured. Please add OPENAI_KEY.",
+    "invalidResponse": "Invalid response from OpenAI API"
   }
 }

@@ -1,4 +1,5 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse, AxiosError } from 'axios';
+import { ERROR_MESSAGES } from '../utils/constants/errorMessages';
 
 export interface InterceptorConfig {
   enableRetry?: boolean;
@@ -22,15 +23,17 @@ function delay(ms: number) {
 
 function enhanceError(error: AxiosError) {
   if (!error.response) {
-    error.message = 'Network error. Please check your internet connection.';
+    error.message = ERROR_MESSAGES.network;
   } else if (error.response.status === 401) {
-    error.message = 'Authentication failed. Please check your credentials.';
+    error.message = ERROR_MESSAGES.auth;
   } else if (error.response.status === 403) {
-    error.message = 'Access denied. You do not have permission to perform this action.';
+    error.message = ERROR_MESSAGES.forbidden;
   } else if (error.response.status === 404) {
-    error.message = 'The requested resource was not found.';
+    error.message = ERROR_MESSAGES.notFound;
   } else if (error.response.status >= 500) {
-    error.message = 'Server error. Please try again later.';
+    error.message = ERROR_MESSAGES.server;
+  } else {
+    error.message = ERROR_MESSAGES.unknown;
   }
   return error;
 }
@@ -38,6 +41,8 @@ function enhanceError(error: AxiosError) {
 function shouldRetry(error: AxiosError): boolean {
   if (!error.config) return false;
   if ((error.config as any).noRetry) return false;
+
+  if (error.response?.status === 401) return false;
 
   if (!error.response) return true;
   if (error.response.status >= 500) return true;

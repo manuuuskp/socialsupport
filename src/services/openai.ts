@@ -2,6 +2,7 @@ import { createAxiosInstance } from './axiosInterceptor';
 import { type OpenAIRequest } from '../types/types';
 import { fieldPrompts } from '../utils/constants/prompts';
 import { buildSystemPrompt, buildUserPrompt } from '../utils/prompts/buildPrompts';
+import { ERROR_MESSAGES } from '../utils/constants/errorMessages';
 
 const API_KEY = import.meta.env.VITE_OPENAI_KEY;
 
@@ -29,6 +30,12 @@ const openaiApi = createAxiosInstance({
   enableRetry: true,
   maxRetries: 2,
   retryDelay: 1000,
+  onError: async (error) => {
+    if (error.response?.status === 401) {
+      throw new Error(ERROR_MESSAGES.openAIInvalidKey);
+    }
+    throw error;
+  }
 });
 
 export async function generateText({
@@ -39,7 +46,7 @@ export async function generateText({
   language = 'en'
 }: OpenAIRequest): Promise<string> {
   if (!API_KEY) {
-    throw new Error('OpenAI API key is not configured. Please add OPENAI_KEY.');
+    throw new Error(ERROR_MESSAGES.configureKey);
   }
 
   const systemMessage = buildSystemPrompt({
@@ -74,7 +81,7 @@ export async function generateText({
     });
 
     if (!response.data.choices?.[0]?.message?.content) {
-      throw new Error('Invalid response from OpenAI API');
+      throw new Error(ERROR_MESSAGES.invalidResponse);
     }
 
     return response.data.choices[0].message.content.trim();
