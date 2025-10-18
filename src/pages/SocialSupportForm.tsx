@@ -1,5 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 import i18n from "../i18n";
 import ApplicationForm from "../components/ApplicationForm";
 import FormButtonContainer from "../components/FormButtonContainer";
@@ -14,21 +15,18 @@ import SituationInfo from "../components/socialsupportform/situationInfo/Situati
 import { situtationFormSchema } from "../components/socialsupportform/situationInfo/situationFormSchema";
 import { useSubmitSocialSupportForm } from "../hooks/useSubmitSocialSupportForm";
 
-interface SocialSupportFormProps {
-    onSubmissionSuccess?: (applicationId: string) => void;
-}
-
-const SocialSupportForm = ({ onSubmissionSuccess }: SocialSupportFormProps) => {
+const SocialSupportForm = () => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
     const TOTAL_STEPS = steps.length;
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const { formData, currentStep } = useAppSelector(state => state.socialSupportForm);
     const { isSubmitting, submitForm } = useSubmitSocialSupportForm();
 
     const handleSubmit = async () => {
         const applicationId = await submitForm();
-        if (applicationId && onSubmissionSuccess) {
-            onSubmissionSuccess(applicationId);
+        if (applicationId) {
+            navigate(`/success/${applicationId}`);
         }
     };
 

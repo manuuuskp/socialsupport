@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './i18n';
 import { store } from './store';
 import Layout from './pages/Layout'
@@ -16,7 +17,9 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Layout />
+      <Router>
+        <Layout />
+      </Router>
     </Provider>
   )
 }
