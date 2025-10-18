@@ -15,7 +15,7 @@ export const useSubmitSocialSupportForm = () => {
   const submitForm = async (): Promise<string | null> => {
     try {
       setIsSubmitting(true);
-      
+
       const response = await submitSocialSupportApplication(formData);
 
       dispatch(resetForm());
@@ -24,9 +24,22 @@ export const useSubmitSocialSupportForm = () => {
       return response.applicationId;
 
     } catch (error: any) {
-      const message = error.message || t('form.submission.failure');
+      const message = error instanceof Error ? error.message : t('form.submission.failure');
       toast.error(message);
-      return null;
+
+      const errorDetails = {
+        type: 'Form Submission Error',
+        message: message,
+        stack: error.stack,
+        timestamp: new Date().toISOString(),
+        context: 'useSubmitSocialSupportForm',
+      };
+
+      if (import.meta.env.DEV) {
+        console.error('Form Submission Error:', errorDetails);
+      }
+
+      throw error;
     } finally {
       setIsSubmitting(false);
     }

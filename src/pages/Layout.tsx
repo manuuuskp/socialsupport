@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "../components/Header";
 import SuccessPage from "./SuccessPage";
 import NotFound from "./NotFound";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const SocialSupportForm = lazy(() => import("./SocialSupportForm"));
 
@@ -13,17 +14,19 @@ const Layout = () => {
                 <Header />
             </header>
             <main className="flex-1 pt-16 overflow-y-auto mobile-scroll">
-                <Suspense fallback={
-                    <div className="flex justify-center items-center min-h-[50vh]" role="status" aria-label="Loading application form">
-                        <div className="w-8 h-8 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" aria-hidden="true"></div>
-                    </div>
-                }>
-                    <Routes>
-                        <Route path="/" element={<SocialSupportForm />} />
-                        <Route path="/success/:applicationId" element={<SuccessPage />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </Suspense>
+                <ErrorBoundary>
+                    <Suspense fallback={
+                        <div className="flex justify-center items-center min-h-[50vh]" role="status" aria-label="Loading application form">
+                            <div className="w-8 h-8 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" aria-hidden="true"></div>
+                        </div>
+                    }>
+                        <Routes>
+                            <Route path="/" element={<SocialSupportForm />} />
+                            <Route path="/success/:applicationId" element={<SuccessPage />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </Suspense>
+                </ErrorBoundary>
             </main>
         </div>
     )
