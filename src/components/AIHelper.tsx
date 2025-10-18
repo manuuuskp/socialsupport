@@ -90,7 +90,7 @@ const AIHelper = ({
 
         <button
           onClick={handleGenerate}
-          disabled={loading}
+          disabled={loading || userPrompt.trim().length < 15}
           className="self-start px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-300"
         >
           {t('form.step3.aiModal.regenerate')}
