@@ -27,6 +27,13 @@ const SituationInfo = () => {
 
     const watchedValues = watch();
 
+    const isFieldValid = (fieldName: keyof SituationFormData) => {
+        const value = watchedValues[fieldName];
+        if (!value || typeof value !== 'string') return false;
+        const trimmedValue = value.trim();
+        return trimmedValue.length >= 15;
+    };
+
     useEffect(() => {
         const subscription = watch((value) => {
             const trimmedValue = Object.fromEntries(
@@ -84,6 +91,7 @@ const SituationInfo = () => {
                         control={control}
                         onAIHelp={handleAIHelp}
                         error={t(errors[field as keyof SituationFormData]?.message || '')}
+                        isValid={isFieldValid(field as keyof SituationFormData)}
                     />
                 ))}
             </form>

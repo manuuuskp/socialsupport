@@ -14,16 +14,22 @@ interface Props {
     control: Control<SituationFormData>;
     onAIHelp: (fieldKey: string) => void;
     error?: any;
+    isValid?: boolean;
 }
 
-const TextAreaFieldWithAI = ({ name, label, placeholder, helpText, rows = 4, control, onAIHelp, error }: Props) => {
+const TextAreaFieldWithAI = ({ name, label, placeholder, helpText, rows = 4, control, onAIHelp, error, isValid = false }: Props) => {
     const { t } = useTranslation();
 
     return (
         <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
                 <label htmlFor={name} className="font-medium">{label}</label>
-                <button type="button" onClick={() => onAIHelp(name)} className="text-sm text-blue-600 hover:underline">
+                <button 
+                    type="button" 
+                    onClick={() => onAIHelp(name)} 
+                    disabled={!isValid}
+                    className={`text-sm ${isValid ? 'text-blue-600 hover:underline cursor-pointer' : 'text-gray-400 cursor-not-allowed'}`}
+                >
                     {t('buttons.aiHelper')}
                 </button>
             </div>
