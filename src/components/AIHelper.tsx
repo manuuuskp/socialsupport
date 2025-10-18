@@ -37,7 +37,6 @@ const AIHelper = ({
     if (open) {
       setEditedText('');
       setIsEditing(false);
-      setUserPrompt('');
       reset();
       handleGenerate();
     }
@@ -65,7 +64,6 @@ const AIHelper = ({
 
   const handleClose = () => {
     setEditedText('');
-    setUserPrompt('');
     setIsEditing(false);
     reset();
     onClose();

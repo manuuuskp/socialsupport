@@ -17,7 +17,6 @@ const SituationInfo = () => {
 
     const [aiModalOpen, setAIModalOpen] = useState(false);
     const [currentField, setCurrentField] = useState('');
-    const [userPrompt, setUserPrompt] = useState('');
 
     const { control, watch, setValue, formState: { errors } } = useForm<SituationFormData>({
         resolver: yupResolver(situtationFormSchema),
@@ -50,7 +49,6 @@ const SituationInfo = () => {
 
     const handleAIHelp = (fieldKey: string) => {
         setCurrentField(fieldKey);
-        setUserPrompt('');
         setAIModalOpen(true);
     };
 
@@ -58,6 +56,14 @@ const SituationInfo = () => {
         setValue(currentField as keyof SituationFormData, text, { shouldValidate: true });
         setAIModalOpen(false);
     };
+
+    const handleClose = () => {
+        setAIModalOpen(false);
+    }
+
+    const handleSetPrompt = (text: string) => {
+        setValue(currentField as keyof SituationFormData, text, { shouldValidate: false });
+    }
 
     const getContextText = (fieldKey: string) => {
         const context: any = {
@@ -67,13 +73,12 @@ const SituationInfo = () => {
         };
 
         const draft = watchedValues[fieldKey as keyof SituationFormData];
-        if (draft) context.draftText = draft;
-        if (userPrompt) context.userPrompt = userPrompt;
+        if (draft) context.userPrompt = draft;
 
         return JSON.stringify(context);
     };
 
-    const contextText = useMemo(() => getContextText(currentField), [currentField, formData, watchedValues, userPrompt, i18n.language]);
+    const contextText = useMemo(() => getContextText(currentField), [currentField, formData, watchedValues, i18n.language]);
 
     return (
         <div className="page-container">
@@ -98,14 +103,14 @@ const SituationInfo = () => {
 
             <AIHelper
                 open={aiModalOpen}
-                onClose={() => setAIModalOpen(false)}
+                onClose={handleClose}
                 onAccept={handleAIAccept}
                 fieldKey={currentField}
                 contextText={contextText}
                 tone="professional"
                 length="medium"
-                userPrompt={userPrompt}
-                setUserPrompt={setUserPrompt}
+                userPrompt={watchedValues[currentField as keyof SituationFormData]}
+                setUserPrompt={handleSetPrompt}
             />
         </div>
     );
