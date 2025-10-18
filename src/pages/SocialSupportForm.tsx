@@ -14,12 +14,23 @@ import SituationInfo from "../components/socialsupportform/situationInfo/Situati
 import { situtationFormSchema } from "../components/socialsupportform/situationInfo/situationFormSchema";
 import { useSubmitSocialSupportForm } from "../hooks/useSubmitSocialSupportForm";
 
-const SocialSupportForm = () => {
+interface SocialSupportFormProps {
+    onSubmissionSuccess?: (applicationId: string) => void;
+}
+
+const SocialSupportForm = ({ onSubmissionSuccess }: SocialSupportFormProps) => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
     const TOTAL_STEPS = steps.length;
     const dispatch = useAppDispatch();
     const { formData, currentStep } = useAppSelector(state => state.socialSupportForm);
     const { isSubmitting, submitForm } = useSubmitSocialSupportForm();
+
+    const handleSubmit = async () => {
+        const applicationId = await submitForm();
+        if (applicationId && onSubmissionSuccess) {
+            onSubmissionSuccess(applicationId);
+        }
+    };
 
     const handleNext = () => {
         if (currentStep < TOTAL_STEPS - 1) {
@@ -79,7 +90,7 @@ const SocialSupportForm = () => {
             <div className="bg-white shadow-lg rounded-lg p-4 sm:p-6 md:p-8 mb-8">
                 <div className="min-h-[300px] sm:min-h-[400px]">
                     {renderCurrentStep()}
-                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={isSubmitting} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={submitForm} />
+                    <FormButtonContainer currentStep={currentStep} steps={steps} isSubmitting={isSubmitting} handleNext={handleNext} handlePrevious={handlePrevious} isValidStep={isValidStep} handleSubmit={handleSubmit} />
                 </div>
             </div>
             <ToastContainer rtl={i18n.dir(i18n.language) === 'rtl'} position="bottom-left" autoClose={1500} />

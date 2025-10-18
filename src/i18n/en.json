@@ -150,6 +150,17 @@
       "failure": "Failed to submit form. Please try again."
     }
   },
+  "success": {
+    "title": "Application Submitted Successfully!",
+    "applicationId": "Application ID",
+    "saveId": "Please save this ID for your records",
+    "nextSteps": "Next Steps:",
+    "step1": "You will receive an email confirmation shortly.",
+    "step2": "Our team will review your application within 3-5 business days.",
+    "newApplication": "Submit New Application",
+    "print": "Print Confirmation",
+    "contact": "Need help? Contact us at support@example.com"
+  },
   "buttons": {
     "next": "Next",
     "previous": "Previous",
