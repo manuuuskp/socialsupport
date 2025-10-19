@@ -7,6 +7,7 @@ import { store } from './store';
 import Layout from './pages/Layout';
 import ErrorBoundary from './components/ErrorBoundary';
 import { useGlobalErrorHandler } from './hooks/useGlobalErrorHandler';
+import { GlobalErrorProvider } from './components/GlobalErrorProvider';
 
 function App() {
   const { i18n } = useTranslation();
@@ -19,13 +20,15 @@ function App() {
   }, [i18n.language]);
 
   return (
-    <ErrorBoundary>
-      <Provider store={store}>
-        <Router>
-          <Layout />
-        </Router>
-      </Provider>
-    </ErrorBoundary>
+    <GlobalErrorProvider>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <Router>
+            <Layout />
+          </Router>
+        </Provider>
+      </ErrorBoundary>
+    </GlobalErrorProvider>
   );
 }
 
