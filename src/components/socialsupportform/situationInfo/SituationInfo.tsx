@@ -68,7 +68,7 @@ const SituationInfo = () => {
     const getContextText = (fieldKey: string) => {
         const context: any = {
             field: fieldKey,
-            applicant: { ...formData.personal, ...formData.family },
+            applicant: { personal: { ...formData.personal }, family: { ...formData.family } },
             language: i18n.language,
         };
 
