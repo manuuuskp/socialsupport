@@ -30,8 +30,6 @@ export const buildUserPrompt = ({ fieldKey, contextText, language }: OpenAIReque
 
   const userInfo = JSON.parse(contextText);
 
-  console.log(userInfo);
-
   return `The user is filling the field: "${fieldKey}"
 
 Language requested: ${language}
