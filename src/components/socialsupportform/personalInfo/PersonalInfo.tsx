@@ -11,6 +11,7 @@ import SelectField from '../../form/SelectField';
 import TextAreaField from '../../form/TextAreaField';
 import PhoneField from '../../form/PhoneField';
 import { personalFormSchema } from './personalFormSchema';
+import { getSchemaForStep } from '../../../utils/validation/validation';
 
 type PersonalFormData = yup.InferType<typeof personalFormSchema>;
 
@@ -19,12 +20,14 @@ const PersonalInfo = () => {
   const dispatch = useAppDispatch();
   const formData = useAppSelector((state) => state.socialSupportForm.formData);
 
+  const personalSchema = getSchemaForStep(0);
+
   const {
     control,
     watch,
     formState: { errors },
   } = useForm<PersonalFormData>({
-    resolver: yupResolver(personalFormSchema) as any,
+    resolver: yupResolver(personalSchema) as any,
     defaultValues: formData.personal,
     mode: 'onChange',
   });

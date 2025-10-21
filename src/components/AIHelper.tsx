@@ -100,6 +100,7 @@ const AIHelper = ({
         {error && (
           <div className="bg-red-50 border border-red-200 rounded p-2 text-red-700 text-sm">
             <p>{t('form.step3.aiModal.error')}</p>
+            <p>{error}</p>
             <button onClick={handleGenerate} className="underline mt-1 text-red-600">
               {t('form.step3.aiModal.tryAgain')}
             </button>

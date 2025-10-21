@@ -8,12 +8,10 @@ import ProgressBar from "../components/ProgressBar";
 import PersonalInfo from "../components/socialsupportform/personalInfo/PersonalInfo";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setCurrentStep } from "../store/socialSupportFormSlice";
-import { personalFormSchema } from "../components/socialsupportform/personalInfo/personalFormSchema";
 import FamilyInfo from "../components/socialsupportform/familyInfo/FamilyInfo";
-import { familyFormSchema } from "../components/socialsupportform/familyInfo/familyFormSchema";
 import SituationInfo from "../components/socialsupportform/situationInfo/SituationInfo";
-import { situtationFormSchema } from "../components/socialsupportform/situationInfo/situationFormSchema";
 import { useSubmitSocialSupportForm } from "../hooks/useSubmitSocialSupportForm";
+import { getSchemaForStep } from '../utils/validation/validation';
 
 const SocialSupportForm = () => {
     const steps = ['step1.title', 'step2.title', 'step3.title'];
@@ -45,15 +43,16 @@ const SocialSupportForm = () => {
 
     const isValidStep = (step: number): boolean => {
         try {
+            const schema = getSchemaForStep(step);
             switch (step) {
                 case 0:
-                    personalFormSchema.validateSync(formData.personal, { abortEarly: false });
+                    schema.validateSync(formData.personal, { abortEarly: false });
                     break;
                 case 1:
-                    familyFormSchema.validateSync(formData.family, { abortEarly: false });
+                    schema.validateSync(formData.family, { abortEarly: false });
                     break;
                 case 2:
-                    situtationFormSchema.validateSync(formData.situation, { abortEarly: false });
+                    schema.validateSync(formData.situation, { abortEarly: false });
                     break;
                 default:
                     return false;

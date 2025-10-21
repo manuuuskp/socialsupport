@@ -10,6 +10,7 @@ import { CURRENCIES } from '../../../utils/constants/constants';
 import SelectField from '../../form/SelectField';
 import InputField from '../../form/InputField';
 import IncomeField from '../../form/CurrencyField';
+import { getSchemaForStep } from '../../../utils/validation/validation';
 
 type FamilyFormData = yup.InferType<typeof familyFormSchema>;
 
@@ -18,12 +19,14 @@ const FamilyInfo = () => {
     const dispatch = useAppDispatch();
     const formData = useAppSelector((state) => state.socialSupportForm.formData);
 
+    const familySchema = getSchemaForStep(1);
+
     const {
         control,
         watch,
         formState: { errors },
     } = useForm<FamilyFormData>({
-        resolver: yupResolver(familyFormSchema),
+        resolver: yupResolver(familySchema),
         defaultValues: formData.family,
         mode: 'onChange',
     });

@@ -8,6 +8,7 @@ import { updateStep } from '../../../store/socialSupportFormSlice';
 import AIHelper from '../../AIHelper';
 import { situtationFormSchema } from './situationFormSchema';
 import TextAreaFieldWithAI from '../../form/TextAreaFieldWithAI';
+import { getSchemaForStep } from '../../../utils/validation/validation';
 
 const SituationInfo = () => {
     type SituationFormData = yup.InferType<typeof situtationFormSchema>;
@@ -15,11 +16,13 @@ const SituationInfo = () => {
     const dispatch = useAppDispatch();
     const formData = useAppSelector((state) => state.socialSupportForm.formData);
 
+    const situationSchema = getSchemaForStep(2);
+
     const [aiModalOpen, setAIModalOpen] = useState(false);
     const [currentField, setCurrentField] = useState('');
 
     const { control, watch, setValue, formState: { errors } } = useForm<SituationFormData>({
-        resolver: yupResolver(situtationFormSchema),
+        resolver: yupResolver(situationSchema),
         defaultValues: formData.situation,
         mode: 'onChange',
     });
