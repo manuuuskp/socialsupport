@@ -2,6 +2,22 @@ import { render, screen } from '@testing-library/react';
 import { act } from '@testing-library/react';
 import App from '../App';
 
+jest.mock('../hooks/useGlobalErrorHandler', () => ({
+  useGlobalErrorHandler: jest.fn(),
+}));
+
+jest.mock('../components/ErrorBoundary', () => {
+  return function MockErrorBoundary({ children }: { children: React.ReactNode }) {
+    return <div data-testid="mock-error-boundary">{children}</div>;
+  };
+});
+
+jest.mock('../components/GlobalErrorProvider', () => ({
+  GlobalErrorProvider: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="mock-global-error-provider">{children}</div>
+  ),
+}));
+
 jest.mock('../pages/Layout', () => {
   return function MockLayout() {
     return <div data-testid="mock-layout">Layout Component</div>;

@@ -138,6 +138,9 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
+      const financialField = screen.getByLabelText(/financial situation/i);
+      await user.type(financialField, 'I need financial help for my family');
+      
       const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
@@ -149,19 +152,26 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
+      // Type at least 15 characters to enable the AI button
+      const financialField = screen.getByLabelText(/financial situation/i);
+      await user.type(financialField, 'I need financial help for my family');
+      
       const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
       const acceptButton = screen.getByText('Accept');
       await user.click(acceptButton);
       
-      const financialField = screen.getByLabelText(/financial situation/i);
       expect(financialField).toHaveValue('AI generated text for testing');
     });
 
     it('should close AI modal when close button is clicked', async () => {
       const user = userEvent.setup();
       renderSituationInfo();
+      
+      // Type at least 15 characters to enable the AI button
+      const financialField = screen.getByLabelText(/financial situation/i);
+      await user.type(financialField, 'I need financial help for my family');
       
       const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
@@ -179,6 +189,15 @@ describe('SituationInfo Component', () => {
     it('should open AI modal for different fields', async () => {
       const user = userEvent.setup();
       renderSituationInfo();
+      
+      // Type at least 15 characters in each field to enable AI buttons
+      const financialField = screen.getByLabelText(/financial situation/i);
+      const employmentField = screen.getByLabelText(/employment circumstances/i);
+      const reasonField = screen.getByLabelText(/reason for applying/i);
+      
+      await user.type(financialField, 'I need financial help for my family');
+      await user.type(employmentField, 'I need employment assistance now');
+      await user.type(reasonField, 'I need support for my children');
       
       const aiHelpButtons = screen.getAllByText(/help me write/i);
       
