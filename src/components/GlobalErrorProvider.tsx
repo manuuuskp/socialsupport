@@ -7,7 +7,7 @@ interface GlobalErrorContextType {
 
 const GlobalErrorContext = createContext<GlobalErrorContextType>({
     error: null,
-    setGlobalError: (msg: string | null) => { },
+    setGlobalError: () => { },
 });
 
 export const GlobalErrorProvider = ({ children }: { children: React.ReactNode }) => {
