@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOpenAI } from '../hooks/useOpenAI';
 import { type OpenAIRequest } from '../types/types';
@@ -29,6 +29,7 @@ const AIHelper = ({
 }: AIHelperProps) => {
   const { t, i18n } = useTranslation();
   const { data, error, loading, request, reset } = useOpenAI();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [editedText, setEditedText] = useState('');
   const [isEditing, setIsEditing] = useState(false);
@@ -39,6 +40,11 @@ const AIHelper = ({
       setIsEditing(false);
       reset();
       handleGenerate();
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+        const length = textareaRef.current.value.length;
+        textareaRef.current.setSelectionRange(length, length);
+      }
     }
   }, [open, fieldKey]);
 
@@ -81,11 +87,13 @@ const AIHelper = ({
 
       <div className="p-4 flex flex-col gap-3">
         <textarea
+          ref={textareaRef}
           value={userPrompt}
           onChange={(e) => setUserPrompt(e.target.value)}
           placeholder={t('form.step3.aiModal.describeYourSituation')}
           rows={3}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          name="aiHelper"
         />
 
         <button
