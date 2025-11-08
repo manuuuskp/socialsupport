@@ -27,7 +27,7 @@ const PersonalInfo = () => {
     watch,
     formState: { errors },
   } = useForm<PersonalFormData>({
-    resolver: yupResolver(personalSchema) as any,
+    resolver: yupResolver(personalSchema),
     defaultValues: formData.personal,
     mode: 'onChange',
   });

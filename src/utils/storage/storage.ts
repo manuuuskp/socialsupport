@@ -1,3 +1,5 @@
+import { LOCAL_STORAGE_KEY } from "../constants/constants";
+
 export const saveAppState = (key: string, state: Record<string, any>): void => {
   try {
     localStorage.setItem(key, JSON.stringify(state));
@@ -11,7 +13,7 @@ export const loadFromLocalStorage = <T extends Record<string, any>>(
   defaultState?: T
 ): T => {
   try {
-    const data = localStorage.getItem('appState');
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (!data) return defaultState || ({} as T);
 
     const parsed = JSON.parse(data) as Record<string, any>;
@@ -32,7 +34,7 @@ export const loadFromLocalStorage = <T extends Record<string, any>>(
 
 export const clearAppState = (): void => {
   try {
-    localStorage.removeItem('appState');
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
   } catch (error) {
     console.warn('Failed to clear app state:', error);
   }
@@ -40,13 +42,13 @@ export const clearAppState = (): void => {
 
 export const removeAppStateSlice = (sliceKey: string): void => {
   try {
-    const data = localStorage.getItem('appState');
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (!data) return;
 
     const parsed = JSON.parse(data);
     if (parsed && typeof parsed === 'object' && sliceKey in parsed) {
       delete parsed[sliceKey];
-      localStorage.setItem('appState', JSON.stringify(parsed));
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(parsed));
     }
   } catch (error) {
     console.warn(`Failed to remove slice "${sliceKey}" from app state:`, error);
