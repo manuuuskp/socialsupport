@@ -39,3 +39,5 @@ export const CURRENCIES = [
 
 
 export const RTL_LANG_LIST = ['ar'];
+
+export const LOCAL_STORAGE_KEY = 'appState';

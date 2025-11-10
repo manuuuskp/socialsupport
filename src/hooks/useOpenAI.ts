@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { generateText } from '../services/openai';
 import { type OpenAIRequest } from '../types/types';
 
-export function useOpenAI(): {
+export function useOpenAI(options?: { throwOnError?: boolean }): {
   data: string | null;
   error: string | null;
   loading: boolean;
@@ -24,10 +24,26 @@ export function useOpenAI(): {
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
       setError(errorMessage);
+
+      const errorDetails = {
+        type: 'OpenAI API Error',
+        message: errorMessage,
+        stack: err instanceof Error ? err.stack : undefined,
+        timestamp: new Date().toISOString(),
+        context: 'useOpenAI hook',
+      };
+
+      if (import.meta.env.DEV) {
+        console.error('OpenAI Request Error:', errorDetails);
+      }
+
+      if (options?.throwOnError) {
+        throw err;
+      }
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [options?.throwOnError]);
 
   const reset = useCallback(() => {
     setData(null);

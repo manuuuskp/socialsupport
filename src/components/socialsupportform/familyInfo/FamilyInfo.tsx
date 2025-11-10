@@ -10,6 +10,7 @@ import { CURRENCIES } from '../../../utils/constants/constants';
 import SelectField from '../../form/SelectField';
 import InputField from '../../form/InputField';
 import IncomeField from '../../form/CurrencyField';
+import { getSchemaForStep } from '../../../utils/validation/validation';
 
 type FamilyFormData = yup.InferType<typeof familyFormSchema>;
 
@@ -18,12 +19,14 @@ const FamilyInfo = () => {
     const dispatch = useAppDispatch();
     const formData = useAppSelector((state) => state.socialSupportForm.formData);
 
+    const familySchema = getSchemaForStep(1);
+
     const {
         control,
         watch,
         formState: { errors },
     } = useForm<FamilyFormData>({
-        resolver: yupResolver(familyFormSchema),
+        resolver: yupResolver(familySchema),
         defaultValues: formData.family,
         mode: 'onChange',
     });
@@ -70,46 +73,48 @@ const FamilyInfo = () => {
                         helperText={errors.dependents ? t(errors.dependents.message as string) : ''}
                     />
                 </div>
+                <div className="form-grid-2">
+                    <SelectField
+                        name="employmentStatus"
+                        label={t('form.step2.employmentStatus.label')}
+                        placeholder={t('form.step2.employmentStatus.placeholder')}
+                        options={[
+                            { value: 'employed', label: t('form.step2.employmentStatus.options.employed') },
+                            { value: 'unemployed', label: t('form.step2.employmentStatus.options.unemployed') },
+                            { value: 'self-employed', label: t('form.step2.employmentStatus.options.self-employed') },
+                            { value: 'student', label: t('form.step2.employmentStatus.options.student') },
+                        ]}
+                        error={!!errors.employmentStatus}
+                        helperText={errors.employmentStatus ? t(errors.employmentStatus.message as string) : ''}
+                        control={control}
+                    />
 
-                <SelectField
-                    name="employmentStatus"
-                    label={t('form.step2.employmentStatus.label')}
-                    placeholder={t('form.step2.employmentStatus.placeholder')}
-                    options={[
-                        { value: 'employed', label: t('form.step2.employmentStatus.options.employed') },
-                        { value: 'unemployed', label: t('form.step2.employmentStatus.options.unemployed') },
-                        { value: 'self-employed', label: t('form.step2.employmentStatus.options.self-employed') },
-                        { value: 'student', label: t('form.step2.employmentStatus.options.student') },
-                    ]}
-                    error={!!errors.employmentStatus}
-                    helperText={errors.employmentStatus ? t(errors.employmentStatus.message as string) : ''}
-                    control={control}
-                />
-
-                <IncomeField
-                    currencyName="incomeCurrency"
-                    incomeName="monthlyIncome"
-                    label={t('form.step2.monthlyIncome.label')}
-                    error={!!errors.monthlyIncome || !!errors.incomeCurrency}
-                    helperText={errors.monthlyIncome ? t(errors.monthlyIncome.message as string) : errors.incomeCurrency ? t(errors.incomeCurrency.message as string) : ''}
-                    control={control}
-                    currencies={CURRENCIES}
-                />
-
-                <SelectField
-                    name="housingStatus"
-                    label={t('form.step2.housingStatus.label')}
-                    placeholder={t('form.step2.housingStatus.placeholder')}
-                    options={[
-                        { value: 'owned', label: t('form.step2.housingStatus.options.owned') },
-                        { value: 'rented', label: t('form.step2.housingStatus.options.rented') },
-                        { value: 'shelter', label: t('form.step2.housingStatus.options.shelter') },
-                        { value: 'homeless', label: t('form.step2.housingStatus.options.homeless') },
-                    ]}
-                    error={!!errors.housingStatus}
-                    helperText={errors.housingStatus ? t(errors.housingStatus.message as string) : ''}
-                    control={control}
-                />
+                    <IncomeField
+                        currencyName="incomeCurrency"
+                        incomeName="monthlyIncome"
+                        label={t('form.step2.monthlyIncome.label')}
+                        error={!!errors.monthlyIncome || !!errors.incomeCurrency}
+                        helperText={errors.monthlyIncome ? t(errors.monthlyIncome.message as string) : errors.incomeCurrency ? t(errors.incomeCurrency.message as string) : ''}
+                        control={control}
+                        currencies={CURRENCIES}
+                    />
+                </div>
+                <div className="form-grid-2">
+                    <SelectField
+                        name="housingStatus"
+                        label={t('form.step2.housingStatus.label')}
+                        placeholder={t('form.step2.housingStatus.placeholder')}
+                        options={[
+                            { value: 'owned', label: t('form.step2.housingStatus.options.owned') },
+                            { value: 'rented', label: t('form.step2.housingStatus.options.rented') },
+                            { value: 'shelter', label: t('form.step2.housingStatus.options.shelter') },
+                            { value: 'homeless', label: t('form.step2.housingStatus.options.homeless') },
+                        ]}
+                        error={!!errors.housingStatus}
+                        helperText={errors.housingStatus ? t(errors.housingStatus.message as string) : ''}
+                        control={control}
+                    />
+                </div>
             </form>
         </div>
     );

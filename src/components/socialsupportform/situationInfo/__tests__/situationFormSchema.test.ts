@@ -214,12 +214,13 @@ describe('Situation Form Schema Validation', () => {
 
       try {
         await situtationFormSchema.validate(invalidData, { abortEarly: false });
+        fail('Validation should have failed');
       } catch (error: any) {
         const errors = error.inner;
         expect(errors).toHaveLength(3);
-        errors.forEach((err: any) => {
-          expect(err.message).toBe('validation.minLength');
-        });
+        expect(errors.some((err: any) => err.path === 'financialSituation')).toBe(true);
+        expect(errors.some((err: any) => err.path === 'employmentCircumstances')).toBe(true);
+        expect(errors.some((err: any) => err.path === 'reasonForApplying')).toBe(true);
       }
     });
   });

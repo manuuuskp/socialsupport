@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOpenAI } from '../hooks/useOpenAI';
 import { type OpenAIRequest } from '../types/types';
@@ -29,6 +29,7 @@ const AIHelper = ({
 }: AIHelperProps) => {
   const { t, i18n } = useTranslation();
   const { data, error, loading, request, reset } = useOpenAI();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [editedText, setEditedText] = useState('');
   const [isEditing, setIsEditing] = useState(false);
@@ -37,9 +38,13 @@ const AIHelper = ({
     if (open) {
       setEditedText('');
       setIsEditing(false);
-      setUserPrompt('');
       reset();
       handleGenerate();
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+        const length = textareaRef.current.value.length;
+        textareaRef.current.setSelectionRange(length, length);
+      }
     }
   }, [open, fieldKey]);
 
@@ -65,7 +70,6 @@ const AIHelper = ({
 
   const handleClose = () => {
     setEditedText('');
-    setUserPrompt('');
     setIsEditing(false);
     reset();
     onClose();
@@ -83,17 +87,19 @@ const AIHelper = ({
 
       <div className="p-4 flex flex-col gap-3">
         <textarea
+          ref={textareaRef}
           value={userPrompt}
           onChange={(e) => setUserPrompt(e.target.value)}
           placeholder={t('form.step3.aiModal.describeYourSituation')}
           rows={3}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          name="aiHelper"
         />
 
         <button
           onClick={handleGenerate}
-          disabled={loading}
-          className="self-start px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-300"
+          disabled={loading || userPrompt.trim().length < 15}
+          className="self-start btn-primary disabled:bg-gray-300"
         >
           {t('form.step3.aiModal.regenerate')}
         </button>
@@ -102,6 +108,7 @@ const AIHelper = ({
         {error && (
           <div className="bg-red-50 border border-red-200 rounded p-2 text-red-700 text-sm">
             <p>{t('form.step3.aiModal.error')}</p>
+            <p>{error}</p>
             <button onClick={handleGenerate} className="underline mt-1 text-red-600">
               {t('form.step3.aiModal.tryAgain')}
             </button>
@@ -132,7 +139,7 @@ const AIHelper = ({
           <>
             <button
               onClick={handleAccept}
-              className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="btn-primary"
             >
               {t('form.step3.aiModal.accept')}
             </button>
@@ -149,7 +156,7 @@ const AIHelper = ({
           <button
             onClick={handleAccept}
             disabled={!editedText.trim()}
-            className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-300"
+            className="btn-primary disabled:bg-gray-300"
           >
             {t('form.step3.aiModal.accept')}
           </button>

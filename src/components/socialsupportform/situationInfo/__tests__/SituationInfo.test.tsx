@@ -37,7 +37,7 @@ describe('SituationInfo Component', () => {
 
     it('should render AI Help buttons for each field', () => {
       renderSituationInfo();
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       expect(aiHelpButtons).toHaveLength(3);
     });
 
@@ -138,7 +138,10 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      const financialField = screen.getByLabelText(/financial situation/i);
+      await user.type(financialField, 'I need financial help for my family');
+      
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
       expect(screen.getByTestId('ai-helper-modal')).toBeInTheDocument();
@@ -149,13 +152,16 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      // Type at least 15 characters to enable the AI button
+      const financialField = screen.getByLabelText(/financial situation/i);
+      await user.type(financialField, 'I need financial help for my family');
+      
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
       const acceptButton = screen.getByText('Accept');
       await user.click(acceptButton);
       
-      const financialField = screen.getByLabelText(/financial situation/i);
       expect(financialField).toHaveValue('AI generated text for testing');
     });
 
@@ -163,7 +169,11 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      // Type at least 15 characters to enable the AI button
+      const financialField = screen.getByLabelText(/financial situation/i);
+      await user.type(financialField, 'I need financial help for my family');
+      
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       await user.click(aiHelpButtons[0]);
       
       expect(screen.getByTestId('ai-helper-modal')).toBeInTheDocument();
@@ -180,7 +190,16 @@ describe('SituationInfo Component', () => {
       const user = userEvent.setup();
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByText(/ai help/i);
+      // Type at least 15 characters in each field to enable AI buttons
+      const financialField = screen.getByLabelText(/financial situation/i);
+      const employmentField = screen.getByLabelText(/employment circumstances/i);
+      const reasonField = screen.getByLabelText(/reason for applying/i);
+      
+      await user.type(financialField, 'I need financial help for my family');
+      await user.type(employmentField, 'I need employment assistance now');
+      await user.type(reasonField, 'I need support for my children');
+      
+      const aiHelpButtons = screen.getAllByText(/help me write/i);
       
       // Test first field
       await user.click(aiHelpButtons[0]);
@@ -242,7 +261,7 @@ describe('SituationInfo Component', () => {
     it('should have accessible buttons', () => {
       renderSituationInfo();
       
-      const aiHelpButtons = screen.getAllByRole('button', { name: /ai help/i });
+      const aiHelpButtons = screen.getAllByRole('button', { name: /help me write/i });
       expect(aiHelpButtons).toHaveLength(3);
       
       aiHelpButtons.forEach(button => {

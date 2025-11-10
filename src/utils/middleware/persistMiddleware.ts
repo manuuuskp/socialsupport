@@ -1,7 +1,6 @@
 import { type Middleware } from '@reduxjs/toolkit';
 import { saveAppState } from '../storage/storage';
-
-const LOCAL_STORAGE_KEY = 'appState';
+import { LOCAL_STORAGE_KEY } from '../constants/constants';
 
 export const persistMiddleware = (sliceKeys: string[]): Middleware => {
   return (storeAPI) => (next) => (action) => {
@@ -16,7 +15,9 @@ export const persistMiddleware = (sliceKeys: string[]): Middleware => {
       }
     });
 
-    saveAppState(LOCAL_STORAGE_KEY, slicesToPersist);
+    if (Object.keys(slicesToPersist).length > 0) {
+      saveAppState(LOCAL_STORAGE_KEY, slicesToPersist);
+    }
 
     return result;
   };

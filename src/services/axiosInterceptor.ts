@@ -1,168 +1,115 @@
-import axios from 'axios';
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse, AxiosError } from 'axios';
+import { ERROR_MESSAGES } from '../utils/constants/errorMessages';
 
-interface InterceptorConfig {
+export interface InterceptorConfig {
   enableRetry?: boolean;
   maxRetries?: number;
   retryDelay?: number;
-  enableTimeout?: boolean;
   timeout?: number;
-  onRequest?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig;
+  onRequest?: (config: AxiosRequestConfig) => AxiosRequestConfig;
   onResponse?: (response: AxiosResponse) => AxiosResponse;
   onError?: (error: AxiosError) => Promise<any>;
 }
 
-class AxiosInterceptorService {
-  private static instance: AxiosInterceptorService;
-  private retryCount = new Map<string, number>();
+const retryCountMap = new Map<string, number>();
 
-  private constructor() {}
-
-  public static getInstance(): AxiosInterceptorService {
-    if (!AxiosInterceptorService.instance) {
-      AxiosInterceptorService.instance = new AxiosInterceptorService();
-    }
-    return AxiosInterceptorService.instance;
-  }
-
-  public setupInterceptors(axiosInstance: AxiosInstance, config: InterceptorConfig = {}): AxiosInstance {
-    const {
-      enableRetry = true,
-      maxRetries = 2,
-      retryDelay = 1000,
-      enableTimeout = true,
-      timeout = 10000,
-      onRequest,
-      onResponse,
-      onError,
-    } = config;
-
-    if (enableTimeout && !axiosInstance.defaults.timeout) {
-      axiosInstance.defaults.timeout = timeout;
-    }
-
-    axiosInstance.interceptors.request.use(
-      (config: InternalAxiosRequestConfig) => {
-
-        config.metadata = { startTime: Date.now() };
-
-        if (onRequest) {
-          config = onRequest(config);
-        }
-
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      }
-    );
-
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        const requestKey = this.getRequestKey(response.config);
-        this.retryCount.delete(requestKey);
-
-        if (onResponse) {
-          response = onResponse(response);
-        }
-
-        return response;
-      },
-      async (error: AxiosError) => {
-
-        if (onError) {
-          try {
-            return await onError(error);
-          } catch (customError) {
-            return Promise.reject(customError);
-          }
-        }
-
-        if (enableRetry && this.shouldRetry(error)) {
-          const requestKey = this.getRequestKey(error.config!);
-          const currentRetryCount = this.retryCount.get(requestKey) || 0;
-
-          if (currentRetryCount < maxRetries) {
-            this.retryCount.set(requestKey, currentRetryCount + 1);
-            
-            const delay = retryDelay * Math.pow(2, currentRetryCount);
-
-            await this.delay(delay);
-            return axiosInstance(error.config!);
-          } else {
-            this.retryCount.delete(requestKey);
-          }
-        }
-
-        return Promise.reject(this.enhanceError(error));
-      }
-    );
-
-    return axiosInstance;
-  }
-
-  private shouldRetry(error: AxiosError): boolean {
-    if (!error.config) return false;
-
-    if (error.config.metadata?.noRetry) return false;
-
-    if (!error.response) return true;
-
-    if (error.response.status >= 500) return true;
-
-    if (error.response.status === 429) return true;
-
-    if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) return true;
-
-    return false;
-  }
-
-  private getRequestKey(config: InternalAxiosRequestConfig): string {
-    return `${config.method}-${config.url}-${JSON.stringify(config.params || {})}`;
-  }
-
-  private delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  private enhanceError(error: AxiosError): AxiosError {
-    if (!error.response) {
-      error.message = 'Network error. Please check your internet connection.';
-    } else if (error.response.status === 401) {
-      error.message = 'Authentication failed. Please check your credentials.';
-    } else if (error.response.status === 403) {
-      error.message = 'Access denied. You do not have permission to perform this action.';
-    } else if (error.response.status === 404) {
-      error.message = 'The requested resource was not found.';
-    } else if (error.response.status >= 500) {
-      error.message = 'Server error. Please try again later.';
-    }
-
-    return error;
-  }
-
-  public createInstance(baseConfig: AxiosRequestConfig = {}, interceptorConfig: InterceptorConfig = {}): AxiosInstance {
-    const instance = axios.create(baseConfig);
-    return this.setupInterceptors(instance, interceptorConfig);
-  }
+function getRequestKey(config: AxiosRequestConfig) {
+  return `${config.method}-${config.url}-${JSON.stringify(config.params || {})}`;
 }
 
-export const axiosInterceptorService = AxiosInterceptorService.getInstance();
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-export const createAxiosInstance = (
+function enhanceError(error: AxiosError) {
+  if (!error.response) {
+    error.message = ERROR_MESSAGES.network;
+  } else if (error.response.status === 401) {
+    error.message = ERROR_MESSAGES.auth;
+  } else if (error.response.status === 403) {
+    error.message = ERROR_MESSAGES.forbidden;
+  } else if (error.response.status === 404) {
+    error.message = ERROR_MESSAGES.notFound;
+  } else if (error.response.status >= 500) {
+    error.message = ERROR_MESSAGES.server;
+  } else {
+    error.message = ERROR_MESSAGES.unknown;
+  }
+  return error;
+}
+
+function shouldRetry(error: AxiosError): boolean {
+  if (!error.config) return false;
+  if ((error.config as any).noRetry) return false;
+
+  if (error.response?.status === 401) return false;
+
+  if (!error.response) return true;
+  if (error.response.status >= 500) return true;
+  if (error.response.status === 429) return true;
+  if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) return true;
+
+  return false;
+}
+
+export function createAxiosInstance(
   baseConfig: AxiosRequestConfig = {},
   interceptorConfig: InterceptorConfig = {}
-): AxiosInstance => {
-  return axiosInterceptorService.createInstance(baseConfig, interceptorConfig);
-};
+): AxiosInstance {
+  const {
+    enableRetry = true,
+    maxRetries = 2,
+    retryDelay = 1000,
+    timeout = 10000,
+    onRequest,
+    onResponse,
+    onError,
+  } = interceptorConfig;
 
-export type { InterceptorConfig };
+  const instance = axios.create({ ...baseConfig, timeout });
 
-declare module 'axios' {
-  interface InternalAxiosRequestConfig {
-    metadata?: {
-      startTime?: number;
-      noRetry?: boolean;
-    };
-  }
+  instance.interceptors.request.use(
+    config => {
+      (config as any).metadata = { startTime: Date.now() };
+      if (onRequest) config = onRequest(config) as any;
+      return config;
+    },
+    error => Promise.reject(error)
+  );
+
+  instance.interceptors.response.use(
+    response => {
+      const key = getRequestKey(response.config);
+      retryCountMap.delete(key);
+
+      if (onResponse) response = onResponse(response);
+      return response;
+    },
+    async error => {
+      const key = getRequestKey(error.config!);
+
+      if (onError) {
+        try {
+          return await onError(error);
+        } catch (customError) {
+          return Promise.reject(customError);
+        }
+      }
+
+      if (enableRetry && shouldRetry(error)) {
+        const currentRetry = retryCountMap.get(key) || 0;
+        if (currentRetry < maxRetries) {
+          retryCountMap.set(key, currentRetry + 1);
+          await delay(retryDelay * Math.pow(2, currentRetry));
+          return instance(error.config!);
+        } else {
+          retryCountMap.delete(key);
+        }
+      }
+
+      return Promise.reject(enhanceError(error));
+    }
+  );
+
+  return instance;
 }

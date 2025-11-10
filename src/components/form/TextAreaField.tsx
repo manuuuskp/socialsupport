@@ -1,4 +1,4 @@
-import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
+import { useController, type Control, type FieldValues, type Path } from 'react-hook-form';
 
 
 interface TextAreaFieldProps<T extends FieldValues> {
@@ -20,25 +20,23 @@ const TextAreaField = <T extends FieldValues>({
   error,
   control
 }: TextAreaFieldProps<T>) => {
+  const { field } = useController({
+    name,
+    control,
+  });
 
   return (
     <div className="field-container">
       <label htmlFor={name} className="field-label">
         {label}
       </label>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) => (
-          <textarea
-            {...field}
-            value={field.value || ''}
-            id={name}
-            rows={rows}
-            placeholder={placeholder}
-            className="textarea-default"
-          />
-        )}
+      <textarea
+        {...field}
+        value={field.value || ''}
+        id={name}
+        rows={rows}
+        placeholder={placeholder}
+        className="textarea-default"
       />
 
       {error && helperText && (
