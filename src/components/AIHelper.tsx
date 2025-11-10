@@ -99,7 +99,7 @@ const AIHelper = ({
         <button
           onClick={handleGenerate}
           disabled={loading || userPrompt.trim().length < 15}
-          className="self-start px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-300"
+          className="self-start btn-primary disabled:bg-gray-300"
         >
           {t('form.step3.aiModal.regenerate')}
         </button>
@@ -139,7 +139,7 @@ const AIHelper = ({
           <>
             <button
               onClick={handleAccept}
-              className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="btn-primary"
             >
               {t('form.step3.aiModal.accept')}
             </button>
@@ -156,7 +156,7 @@ const AIHelper = ({
           <button
             onClick={handleAccept}
             disabled={!editedText.trim()}
-            className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-300"
+            className="btn-primary disabled:bg-gray-300"
           >
             {t('form.step3.aiModal.accept')}
           </button>
